@@ -146,7 +146,6 @@
 </template>
 
 <script>
-	// pages/index/index.js
 	// 新密市边界
 	const {
 		city
@@ -157,11 +156,8 @@
 		industrialMapHttpService,
 		resourceRegionHttpService,
 	} = require("./service/index.service");
-	// console.log(
-	//   importantIndustryHttpService,
-	//   industrialMapHttpService,
-	//   resourceRegionHttpService
-	// );
+
+
 	var windowW = 0;
 	var windowH = 0;
 
@@ -231,179 +227,16 @@
 				t: {
 					index: "",
 				},
-
-				// listData: ["", "", "", "", "", "", "", "", "", "", "", ""],
-				// down: false,
-
-				// mapData: [
-				//   {
-				//     id: "0",
-				//     name: "曲梁镇",
-				//     longitude: "113.390891",
-				//     latitude: "34.539443",
-				//   },
-				//   {
-				//     id: "1",
-				//     name: "超化镇",
-				//     longitude: "113.407986",
-				//     latitude: "34.449421",
-				//   },
-				//   {
-				//     id: "2",
-				//     name: "大槐镇",
-				//     longitude: "112.230887",
-				//     latitude: "22.077016",
-				//   },
-				//   {
-				//     id: "3",
-				//     name: "岳村镇",
-				//     longitude: "113.494952",
-				//     latitude: "34.551906",
-				//   },
-				//   {
-				//     id: "4",
-				//     name: "青屏街街道",
-				//     longitude: "113.370114",
-				//     latitude: "34.54251",
-				//   },
-				// ],
-
-				// type: false,
-				// selected: 0,
-				// tagSelected: 0,
-				// markers: [],
-				// customMarkers: [],
-				// points: [],
-				// polygons: [],
-				// longitude: 113.41053421296328,
-				// latitude: 34.500659328587915,
-				// scale: 9.8,
-				// setting: {
-				//   scale: "9.8",
-				//   longitude: "113.41053421296328",
-				//   latitude: "34.500659328587915",
-				// },
-
-				// tagList: [
-				//   "新材料",
-				//   "品牌服装",
-				//   "文化旅游",
-				//   "节能环保",
-				//   "电子信息",
-				//   "生物医药",
-				//   "绿色造纸",
-				//   "清洁煤炭",
-				//   "电力能源",
-				//   "商贸物流",
-				//   "建材家居",
-				//   "美妆珠宝",
-				//   "现代农业",
-				// ],
-
-				// tabs: [
-				//   {
-				//     name: "新密概览",
-				//     id: "1",
-				//   },
-				//   {
-				//     name: "重点产业",
-				//     id: "2",
-				//   },
-				// ],
-
-				// imageWidth: "",
-				// imageHeight: "",
-				// src: "",
 			};
 		},
 		/**
 		 * 生命周期函数--监听页面加载
 		 */
 		onLoad: function(_options) {
-			// var markerList = [];
-			// var customList = []; // 新密市坐标行政区边界
-
-			// this.mapData.map((item, i) => {
-			//   markerList.push({
-			//     iconPath: "https://webapi.amap.com/theme/v1.3/markers/n/mark_b.png",
-			//     id: +item.id,
-			//     longitude: +item.longitude,
-			//     latitude: +item.latitude,
-			//     callout: {
-			//       // content: item.name + ' >>',
-			//       color: "#fff",
-			//       fontSize: 12,
-			//       borderRadius: 3,
-			//       display: "BYCLICK",
-			//       bgColor: "#3399ff",
-			//       padding: 6,
-			//       anchorY: 10,
-			//     },
-			//     width: 18,
-			//     height: 24,
-			//   });
-			//   customList.push({
-			//     id: item.id,
-			//     name: item.name,
-			//   });
-			// });
-			// console.log(markerList);
-			// setTimeout(() => {
-			//   var path = [];
-			//   city.map((item, i) => {
-			//     path.push({
-			//       latitude: +item.lat,
-			//       longitude: +item.lng,
-			//     });
-			//   }); //  console.log(path);
-			//   this.setData({
-			//     markers: markerList,
-			//     customMarkers: customList,
-			//     polygons: [
-			//       {
-			//         points: path,
-			//         color: "#3399ff", //线的颜色
-			//         width: 1, //线的宽度
-			//         dottedLine: false, //是否虚线
-			//         arrowLine: true, //带箭头的线 开发者工具暂不支持该属性
-			//       },
-			//     ],
-			//   });
-			// }, 1000); // wcharts
-
 			this.setData({
 				imageWidth: uni.getSystemInfoSync().windowWidth,
 				imageHeight: uni.getSystemInfoSync().windowHeight,
 			});
-			// console.log(uni.getSystemInfoSync().windowWidth); //计算屏幕宽度比列
-
-			// windowW = this.imageWidth;
-			// new wxCharts({
-			//   canvasId: "columnCanvas",
-			//   type: "column",
-			//   animation: true,
-			//   categories: [2010, 2012, 2014, 2016, 2018, 2019],
-			//   series: [
-			//     {
-			//       name: "增长值",
-			//       data: [17438, 20559, 24068, 28068, 23280, 26800],
-			//       format: function (val, name) {
-			//         return val + "亿";
-			//       },
-			//     },
-			//   ],
-			//   xAxis: {
-			//     disableGrid: false,
-			//     type: "calibration",
-			//   },
-			//   extra: {
-			//     column: {
-			//       width: 15,
-			//     },
-			//   },
-			//   width: windowW,
-			//   height: 260,
-			// });
 		},
 		/**
 		 * 生命周期函数--监听页面初次渲染完成
@@ -557,34 +390,76 @@
 				const years = year || state.years;
 				const amounts = amount || state.amounts;
 				windowW = state.imageWidth * 0.88;
-				console.log("windowW", windowW);
+				console.log("amounts", amounts);
 				new wxCharts({
-					canvasId: "columnCanvas",
-					type: "column",
-					animation: true,
+					canvasId: 'columnCanvas',
 					categories: years,
-					legend: false,
 					series: [{
-						name: "增长值",
-						data: amounts,
-						format: function(val, _name) {
-							return val + "亿";
-						},
-					}, ],
-					xAxis: {
-						disableGrid: false,
-						type: "calibration",
+						name: '增长值',
+						data: amounts, //设置某一个值为null会出现断层
+						format: function(val) {
+							return val.toFixed(2) + '亿';
+						}
+					}],
+
+
+					// 线图（circle）
+					dataPointShape: "circle",
+					type: 'line',
+					extra: {
+						lineStyle: 'curve' //线条的形状（弧形）
 					},
 					yAxis: {
-						min: 0,
-					},
-					extra: {
-						column: {
-							width: 15,
+						title: '金额 (亿)',
+						format: function(val) {
+							return val.toFixed(2);
 						},
+						disabled: true,
 					},
+
+
+					// 区域图（area）
+					// type: 'area',
+					// yAxis: {
+					// 	format: function(val) {
+					// 		return val + '亿';
+					// 	},
+					// 	disabled: true,
+					// },
+
+					// 雷达图（radar）
+					// animation: true,
+					// type: 'radar',
+					// extra: {
+					// 	radar: {
+					// 		gridColor: '#00cc66',
+					// 		labelColor: '#000',
+					// 		max: 100 //雷达数值的最大值
+					// 	}
+					// },
+
+
+
+					// 柱状图（column）
+					// type: "column",
+					// xAxis: {
+					// 	disableGrid: false,
+					// 	type: "calibration",
+					// },
+					// yAxis: {
+					// 	min: 0,
+					// 	disabled: true,
+					// },
+					// extra: {
+					// 	column: {
+					// 		width: 15,
+					// 	},
+					// }, 
+
+					dataLabel: true,
 					width: windowW,
 					height: 260,
+
 				});
 			},
 
@@ -610,7 +485,7 @@
 					(info?.lowRegions || []).map((item) => {
 						let pattern = new RegExp("[\\[\\]]");
 						item.itude = item.itude.replace(pattern, "");
-						console.log(item?.itude?.split(";"));
+						// console.log(item?.itude?.split(";"));
 						item.name = item.resourceName;
 						item.longitude = item?.itude ?
 							item?.itude?.split(";")[0]?.split(",")[0] :
@@ -724,45 +599,6 @@
 					});
 				}
 			},
-
-			// changTabs: function (e) {
-			//   this.setData({
-			//     selected: e.currentTarget.dataset.index,
-			//   });
-			// },
-
-			// handleRegionchange: function (ev) {
-			//   this.mapCtx = uni.createMapContext("myMap");
-			//   this.mapCtx.getCenterLocation({
-			//     success(res) {
-			//       console.log(res.longitude, "经度");
-			//       console.log(res.latitude, "纬度");
-			//     },
-			//   }); // console.log(this.mapCtx.getCenterLocation);
-			// },
-
-			/**
-			 * marker点击事件
-			 */
-			// markertap(e) {
-			//   console.log(e);
-			// },
-
-			//   标签选中效果
-			// selectTag: function (e) {
-			//   console.log(e);
-			//   this.setData({
-			//     tagSelected: e.currentTarget.dataset.index,
-			//   });
-			// },
-
-			// 展开多选
-			// downText: function (e) {
-			//   console.log(e.currentTarget.dataset.index);
-			//   this.setData({
-			//     down: e.currentTarget.dataset.index,
-			//   });
-			// },
 
 			videoErrorCallback() {
 				console.log("占位：函数 videoErrorCallback 未声明");
