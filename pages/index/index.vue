@@ -107,7 +107,7 @@
 						<view class="header">{{ industry }}产业介绍</view>
 						<view class="card dark">
 							<view class="body">
-								<view :class="(down3 === false ? 'omit omit-6' : '') + ' size-14'">
+								<view :class="(down3 === false ? 'omit omit-5' : '') + ' size-14'">
 									{{ importantIndustryDetail.summary }}
 								</view>
 								<view class="text-center size-14 mt10">
@@ -133,8 +133,11 @@
 										0371-87051769
 									</view>
 								</view>
-								<picture class="images-auto" :tableId="item.resourceId" tableName="BILocationResource"
-									:readonly="true"></picture>
+								<uni-picture class="images-auto" :tableId="item.resourceId" tableName="BILocationResource"
+									:readonly="true"></uni-picture>
+							<!-- <image class="images-auto" style="width: 123px; height: 84px"
+									src="https://img2.baidu.com/it/u=3922526097,2180692065&fm=26&fmt=auto&gp=0.jpg">
+								</image> -->
 							</view>
 						</navigator>
 					</view>

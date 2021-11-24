@@ -40,7 +40,21 @@
 	},
 	"easycom": {
 		"autoscan": true,
-		"custom": {}
+		"custom": {
+			"uni-(.*)": "@/components/uni-$1/uni-$1.vue",
+			"html-content": "@/components/html-content/html-content.vue",
+			"image-auto": "@/components/image-auto/image-auto.vue",
+			"nav-bar": "@/components/nav-bar/nav-bar.vue",
+
+			"popover": "@/components/popover/popover.vue",
+			"rate": "@/components/rate/index.vue",
+			"super-scroll-view": "@/components/super-scroll-view/super-scroll-view.vue",
+			"suspension": "@/components/suspension/suspension.vue",
+			"time-picker": "@/components/time-picker/time-picker.vue",
+			"no-data": "@/components/no-data/no-data.vue",
+			"loading": "@/components/loading/loading.vue",
+			"qq-map": "@/components/qq-map/qq-map.vue"
+		}
 	},
 	"globalStyle": {
 		"backgroundTextStyle": "light",

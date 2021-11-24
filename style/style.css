@@ -66,6 +66,10 @@ page {
     -webkit-line-clamp: 3;
 }
 
+.omit-5 {
+    -webkit-line-clamp: 5;
+}
+
 .omit-6 {
     -webkit-line-clamp: 6;
 }

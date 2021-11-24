@@ -1,0 +1,31 @@
+.text {
+    text-align: center;
+    font-size: 30rspx;
+    margin-top: 20rpx;
+    margin-bottom: 30rpx;
+}
+.contain {
+    height: 100%;
+    flex: 1 1;
+    padding: 40rpx 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+}
+.result-message {
+    margin-top: 18rpx;
+    line-height: 1.5;
+    font-size: 30rpx;
+    color: #888;
+    padding-left: 30rpx;
+    padding-right: 30rpx;
+}
+.result-message image {
+    width: 300rpx;
+    height: 300rpx;
+}
