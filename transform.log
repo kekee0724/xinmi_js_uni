@@ -1,0 +1,24 @@
+项目 'builder' 开始转换...
+sourceFolder = /Volumes/software/workspace/前端demo/builder
+搜索到1176个文件，耗时：66ms
+
+
+[Tip]这里引用的全是网络字体，可能在app上面有兼容问题（如字体图标显示不出来，运行后没问题就不用管）  fileKey: iconfont
+write pages.json success!
+write manifest.json success!
+write main.js success!
+
+
+vue文件数量: 8
+支付api数量: 0
+登录api数量: 0
+用时: 29.391s
+转换完成！
+在该小程序项目的同级目录可以看到_uni结尾的项目，即是转换好的uniapp项目，相关日志在该目录里。
+hbxExecutableProgram  /Volumes/software/Applications/HBuilderX.app/Contents/MacOS/HBuilderX
+stdout: 
+stderr: [patch] check FrameWorks Dir
+initSingleFile: "/Users/keke/Library/Application Support/HBuilder X/.lock"
+read size: 96  instanceinfoII size: 96
+checkProcessRunning:[ 77966 ] time(input): "1915:56:082021" (get): "1915:56:082021"
+
