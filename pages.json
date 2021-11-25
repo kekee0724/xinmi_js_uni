@@ -5,26 +5,6 @@
 			"style": {}
 		},
 		{
-			"path": "pages/resource/resource",
-			"style": {}
-		},
-		{
-			"path": "pages/consult/consult",
-			"style": {
-				"navigationBarTitleText": "投资咨询"
-			}
-		},
-		{
-			"path": "pages/details/details",
-			"style": {
-				"navigationBarTitleText": "资源详情"
-			}
-		},
-		{
-			"path": "pages/second/second",
-			"style": {}
-		},
-		{
 			"path": "pages/search/search",
 			"style": {
 				"navigationBarTitleText": "项目选址"
@@ -41,11 +21,10 @@
 	"easycom": {
 		"autoscan": true,
 		"custom": {
-			"uni-(.*)": "@/components/uni-$1/uni-$1.vue",
 			"html-content": "@/components/html-content/html-content.vue",
 			"image-auto": "@/components/image-auto/image-auto.vue",
 			"nav-bar": "@/components/nav-bar/nav-bar.vue",
-
+			"uni-picture": "@/components/picture/picture.vue",
 			"popover": "@/components/popover/popover.vue",
 			"rate": "@/components/rate/index.vue",
 			"super-scroll-view": "@/components/super-scroll-view/super-scroll-view.vue",
@@ -62,5 +41,31 @@
 		"navigationBarTitleText": "新密产业投资地图",
 		"navigationBarTextStyle": "white"
 	},
-	"subPackages": []
+	"subPackages": [
+		{
+			"root": "xinmi",
+			"pages": [
+				{
+					"path": "consult/consult",
+					"style": {
+						"navigationBarTitleText": "投资咨询"
+					}
+				},
+				{
+					"path": "details/details",
+					"style": {
+						"navigationBarTitleText": "资源详情"
+					}
+				},
+				{
+					"path": "resource/resource",
+					"style": {}
+				},
+				{
+					"path": "second/second",
+					"style": {}
+				}
+			]
+		}
+	]
 }

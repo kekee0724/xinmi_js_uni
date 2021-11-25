@@ -1,9 +1,9 @@
 <template>
 	<view>
 		<view class="map-box">
-			<map id="myMap" style="width: 100%; height: 800rpx" :scale="9.8" :polyline="polygons" :latitude="latitude"
-				:longitude="longitude" :markers="markers" @regionchange="handleRegionchange"
-				@callouttap="markertap"></map>
+			<map id="myMap" style="width: 100%; height: 800rpx" :scale="10" :polyline="polygons" :latitude="latitude"
+				:longitude="longitude" :show-location="true" :markers="markers" @regionchange="handleRegionchange"
+				@markertap="markertap" @callouttap="markertap"></map>
 			<view class="map-search flex">
 				<text>新密市</text>
 				<navigator class="flex-item" url="/xinmi/resource/resource?show=true">
@@ -133,9 +133,9 @@
 										0371-87051769
 									</view>
 								</view>
-								<uni-picture class="images-auto" :tableId="item.resourceId" tableName="BILocationResource"
-									:readonly="true"></uni-picture>
-							<!-- <image class="images-auto" style="width: 123px; height: 84px"
+								<uni-picture class="images-auto" :tableId="item.resourceId"
+									tableName="BILocationResource" :readonly="true"></uni-picture>
+								<!-- <image class="images-auto" style="width: 123px; height: 84px"
 									src="https://img2.baidu.com/it/u=3922526097,2180692065&fm=26&fmt=auto&gp=0.jpg">
 								</image> -->
 							</view>
@@ -183,12 +183,12 @@
 
 				setting: {
 					scale: "9.8",
-					longitude: "113.41053421296328",
-					latitude: "34.500659328587915",
+					longitude: "113.45774682330259",
+					latitude: "34.542725600927795",
 				},
 
-				longitude: 113.41053421296328,
-				latitude: 34.500659328587915,
+				longitude: 113.45774682330259,
+				latitude: 34.542725600927795,
 				tagList: ["新材料"],
 
 				tabs: [{
@@ -289,16 +289,36 @@
 						latitude: item.latitude,
 						callout: {
 							content: item.name + " >>",
-							color: "#fff",
-							fontSize: 12,
-							borderRadius: 3,
-							display: "ALWAYS",
-							bgColor: "#3399ff",
-							padding: 6,
-							anchorY: 10,
+							color: "#fff", //文本颜色
+							fontSize: 12, //文字大小
+							borderRadius: 3, //callout边框圆角
+							display: "ALWAYS", //'BYCLICK':点击显示; 'ALWAYS':常显
+							bgColor: "#3399ff", //背景色
+							padding: 6, //文本边缘留白
+							textAlign: 'left', //文本对齐方式。有效值: left, right, center
+
+						},
+						label: {
+							//为标记点旁边增加标签
+							content: '', //标记点旁边的文字
+							color: '#ff6600', //文本颜色
+							fontSize: 16, //文字大小
+							x: 0, //label的坐标，原点是 marker 对应的经纬度
+							y: 0, //label的坐标，原点是 marker 对应的经纬度
+							borderWidth: 1, //边框宽度
+							borderColor: '', //边框颜色
+							borderRadius: 10, //边框圆角
+							bgColor: 'red',
+							padding: 6, //	文本边缘留白
+							textAlign: 'left', //文本对齐方式。有效值: left, right, center
 						},
 						width: 18,
 						height: 24,
+						anchor: {
+							//经纬度在标注图标的锚点，默认底边中点      {x, y}，x表示横向(0-1)，y表示竖向(0-1)。{x: .5, y: 1} 表示底边中点
+							x: .5,
+							y: 1
+						}
 					});
 					customList.push({
 						id: item.id,
@@ -316,15 +336,6 @@
 					this.setData({
 						markers: markerList,
 						customMarkers: customList,
-						// polygons: [
-						//   {
-						//     points: path,
-						//     strokeWidth: 1,
-						//     strokeColor: "#3399ff",
-						//     fillColor: "#3399ff8a",
-						//     zIndex: 0,
-						//   },
-						// ],
 						polygons: [{
 							points: path,
 							color: "#3399ff", //线的颜色
@@ -352,7 +363,11 @@
 				});
 			},
 
+
+			//地图点击事件		
 			markertap(e) {
+				console.log("你点击的标记点ID是:" + e.detail.markerId)
+				console.log(e)
 				uni.navigateTo({
 					url: `/xinmi/second/second?markerId=${e.detail.markerId}`,
 				});
