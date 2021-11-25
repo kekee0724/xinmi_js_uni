@@ -1,6 +1,6 @@
 <template>
   <view>
-    <view class="phone-warp" v-if="show">
+    <view class="phone-warp" v-if="!show">
       <view class="page-body">
         <super-scroll-view
           :showFooter="showFooter"
@@ -64,7 +64,7 @@
                       (tabIndex === 2 && index === TagTypeEnum.resourceRegion)
                     "
                     v-for="(item, index) in selectData"
-                    :key="item.index"
+                    :key="index"
                   >
                     <view class="size-12">{{ item }}</view>
 
@@ -124,7 +124,7 @@
                   @click.native="readItem"
                   :data-item="item"
                   v-for="(item, index) in resourceList"
-                  :key="item.index"
+                  :key="index"
                 >
                   <navigator
                     :url="
@@ -187,7 +187,7 @@
           <view
             class="select-item"
             v-for="(item, index) in selectDatas"
-            :key="item.index"
+            :key="index"
           >
             <view class="title">{{ item.title }}</view>
 
@@ -559,7 +559,7 @@ export default {
       let markerList = [];
       let customList = [];
       // 新密市坐标行政区边界
-      const state = this.data,
+      const state = this,
         mapData = mapDatas || state.mapData;
       mapData.map((item, _i) => {
         markerList.push({
@@ -600,10 +600,10 @@ export default {
           polygons: [
             {
               points: path,
-              strokeWidth: 1,
-              strokeColor: "#3399ff",
-              fillColor: "#3399ff8a",
-              zIndex: 0,
+              color: "#3399ff", //线的颜色
+              width: 1, //线的宽度
+              dottedLine: false, //是否虚线
+              arrowLine: true, //带箭头的线 开发者工具暂不支持该属性
             },
           ],
         });
@@ -627,7 +627,7 @@ export default {
        * 手机上
        */
       let id = e.detail.markerId;
-      const state = this.data,
+      const state = this,
         mapData = state.mapData;
       let resourceTypeValue = mapData.find(
         (item) => item.id === id
@@ -639,7 +639,7 @@ export default {
        * 开发工具调试 开发者工具上获取的markerId并非绑定的id
        */
       // let index = e.detail.markerId - 900000000;
-      // const state = this.data,
+      // const state = this,
       //   mapData = state.mapData;
       // index = index % mapData.length;
       // let id = mapData[index].id,
@@ -696,8 +696,8 @@ export default {
       });
       let index = e.currentTarget.dataset.index;
       this.getTags(null, null, null, index);
-      this.getOneRegion(this.data.tabIndex + 1, null, index);
-      let resourceTypeValues = this.data.resourceType[index].resourceTypeValue;
+      this.getOneRegion(this.tabIndex + 1, null, index);
+      let resourceTypeValues = this.resourceType[index].resourceTypeValue;
       this.getSpaceResourcePage({ resourceTypeValues });
       this.setData({
         tabIndex2: index,
@@ -777,7 +777,7 @@ export default {
 
     bindRegionChange(e) {
       let detailValue = e.detail.value;
-      let industryLocationArr = this.data.industryLocationArr[0];
+      let industryLocationArr = this.industryLocationArr[0];
       let industryLocation1 = industryLocationArr[detailValue[0]];
       let industryLocation2 = industryLocation1.children[detailValue[1]] || {};
       /**
@@ -801,7 +801,7 @@ export default {
     bindcolumnchange(e) {
       let detailValue = e.detail.value;
       let detailColumn = e.detail.column;
-      let industryLocationArr = this.data.industryLocationArr[0];
+      let industryLocationArr = this.industryLocationArr[0];
 
       if (detailColumn === 0) {
         this.setData({
@@ -854,7 +854,7 @@ export default {
           resourceList:
             info.currentPage <= 1
               ? info.items
-              : [...this.data.resourceList, ...info.items],
+              : [...this.resourceList, ...info.items],
           pageIndex: info.currentPage,
           showFooter:
             info.totalPages > 0 && info.currentPage >= info.totalPages,
@@ -926,7 +926,7 @@ export default {
 
     async getTags(index, lowRegion, resourceType, idx) {
       try {
-        const state = this.data,
+        const state = this,
           lowRegions = lowRegion || state.lowRegions,
           resourceTypes = resourceType || state.resourceType;
 
@@ -1058,7 +1058,7 @@ export default {
      */
     async getOneRegion(index, resourceType, idx) {
       try {
-        const state = this.data,
+        const state = this,
           resourceTypes = resourceType || state.resourceType;
         let info = await industrialMapHttpService.resourceRegionCount({
           /**
@@ -1142,6 +1142,18 @@ export default {
           duration: 2000,
         });
       }
+    },
+
+    onReachBottom() {
+      console.log("占位：函数 onReachBottom 未声明");
+    },
+
+    onPullDownRefresh() {
+      console.log("占位：函数 onPullDownRefresh 未声明");
+    },
+
+    readItem() {
+      console.log("占位：函数 readItem 未声明");
     },
   },
 };
