@@ -13,10 +13,14 @@
             <map
               id="myMap"
               style="width: 100%; height: 800rpx"
-              :setting="setting"
+              :scale="10"
+              :polyline="polygons"
+              :latitude="latitude"
+              :longitude="longitude"
+              :show-location="true"
               :markers="markers"
               @regionchange="handleRegionchange"
-              :polygons="polygons"
+              @markertap="markertap"
               @callouttap="markertap"
             ></map>
             <view class="map-search">
@@ -291,12 +295,12 @@ export default {
 
       setting: {
         scale: "9.8",
-        longitude: 113.41053421296328,
-        latitude: 34.500659328587915,
+        longitude: 113.45774682330259,
+        latitude: 34.542725600927795,
       },
 
-      longitude: 113.41053421296328,
-      latitude: 34.500659328587915,
+      longitude: 113.45774682330259,
+      latitude: 34.542725600927795,
       tagList: ["新材料"],
 
       tabs: [
@@ -822,7 +826,7 @@ export default {
           resourceAreaEnd = state.resourceAreaEnd || "",
           resourceTypeValues = state.resourceTypeValues;
 
-        console.warn(resourceRegionName)
+        console.warn(resourceRegionName);
         let info = await industrialMapHttpService.spaceResourcePage({
           pageSize: 25,
           resourceTypeValues,
