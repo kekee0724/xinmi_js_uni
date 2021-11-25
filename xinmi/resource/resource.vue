@@ -414,7 +414,7 @@ export default {
      * @param e
      */
     selectChange: function (e) {
-      const state = this.data;
+      const state = this;
       let selectDatas = state.selectDatas,
         resourceType = state.resourceType,
         fullLowRegions = state.fullLowRegions,
@@ -514,7 +514,7 @@ export default {
     },
 
     reset: function () {
-      const state = this.data;
+      const state = this;
       let selectDatas = state.selectDatas;
 
       /**
@@ -703,7 +703,7 @@ export default {
 
     // 选择器
     bindPickerChange: function (e) {
-      const state = this.data;
+      const state = this;
       let lowRegions = state.lowRegions,
         industryLocation = state.industryLocation,
         resourceArea = state.resourceArea,
@@ -814,7 +814,7 @@ export default {
      */
     async getSpaceResourcePage(parm) {
       try {
-        const state = this.data;
+        const state = this;
         let resourceRegionName = state.resourceRegionName || "新密市",
           industryLocationValues = state.industryLocationValues || "",
           servicePackValues = state.servicePackValues || "",
@@ -822,6 +822,7 @@ export default {
           resourceAreaEnd = state.resourceAreaEnd || "",
           resourceTypeValues = state.resourceTypeValues;
 
+        console.warn(resourceRegionName)
         let info = await industrialMapHttpService.spaceResourcePage({
           pageSize: 25,
           resourceTypeValues,
