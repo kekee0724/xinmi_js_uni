@@ -393,6 +393,7 @@ export default {
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+    console.log("页面相关事件处理函数--监听用户下拉动作");
     this.getSpaceResourcePage({
       pageIndex: 1,
     });
@@ -1145,11 +1146,16 @@ export default {
     },
 
     onReachBottom() {
-      console.log("占位：函数 onReachBottom 未声明");
+      this.getSpaceResourcePage({
+        pageIndex: this.pageIndex + 1,
+      });
     },
 
     onPullDownRefresh() {
-      console.log("占位：函数 onPullDownRefresh 未声明");
+      console.log("占位：函数 onPullDownRefresh");
+      this.getSpaceResourcePage({
+        pageIndex: 1,
+      });
     },
 
     readItem() {

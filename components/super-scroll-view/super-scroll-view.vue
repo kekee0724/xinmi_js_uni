@@ -18,7 +18,7 @@
 				scrolltoupper: true,
 				footerContent: {},
 				srefreshertriggered: false,
-				refresher: {},
+				refresher: true,
 				scrollTop: "",
 				touchStart: false,
 				startOffsetTop: ""
@@ -28,7 +28,7 @@
 			addGlobalClass: true
 		},
 		props: {
-			refreshertriggered: String,
+			refreshertriggered: Boolean,
 			refreshdisable: Boolean,
 			showFooter: {
 				type: Boolean,
@@ -37,12 +37,7 @@
 		},
 		watch: {
 			"refreshertriggered_refreshdisable": {
-				handler: function(newValue, oldValue) {
-					const {
-						refreshertriggered,
-						refreshdisable
-					} = newValue;
-
+				handler: function(_refreshertriggered, refreshdisable) {
 					this.setData({
 						srefreshertriggered: false,
 						refresher: refreshdisable ? false : true
@@ -90,7 +85,7 @@
 			}
 		},
 		// computed: {
-		// 	refreshertriggered_ refreshdisable() {
+		// 	refreshertriggered_refreshdisable() {
 		// 		const {
 		// 			refreshertriggered,
 		// 			refreshdisable
