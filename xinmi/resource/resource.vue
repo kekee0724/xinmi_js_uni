@@ -5,8 +5,8 @@
         <super-scroll-view
           :showFooter="showFooter"
           class="phone-body"
-          @lower="onReachBottom"
-          @pulldown="onPullDownRefresh"
+          @lower="lower"
+          @pulldown="pulldown"
           :refreshertriggered="refreshertriggered"
         >
           <view class="map-box">
@@ -56,66 +56,69 @@
                   </text>
                 </view>
                 <view class="flex down-box mt15">
-                  <view
-                    class="flex-item"
+                  <block
                     v-if="
                       tabIndex === 0 ||
                       (tabIndex === 1 && index == TagTypeEnum.resourceArea) ||
                       (tabIndex === 2 && index === TagTypeEnum.resourceRegion)
                     "
-                    v-for="(item, index) in selectData"
-                    :key="index"
                   >
-                    <view class="size-12">{{ item }}</view>
+                    <view
+                      class="flex-item"
+                      v-for="(item, index) in selectData"
+                      :key="index"
+                    >
+                      <view class="size-12">{{ item }}</view>
 
-                    <view class="pick-box">
-                      <picker
-                        @change="bindPickerChange"
-                        :data-index="index"
-                        :value="
-                          index === TagTypeEnum.resourceRegion
-                            ? resourceRegionIndex
-                            : index === TagTypeEnum.industryLocation
-                            ? industryLocationIndex
-                            : index === TagTypeEnum.resourceArea
-                            ? resourceAreaIndex
-                            : servicePackIndex
-                        "
-                        :range="
-                          index === TagTypeEnum.resourceRegion
-                            ? lowRegions
-                            : index === TagTypeEnum.industryLocation
-                            ? industryLocation
-                            : index === TagTypeEnum.resourceArea
-                            ? resourceArea
-                            : servicePack
-                        "
-                        range-key="label"
-                      >
-                        <view class="flex">
-                          <view class="flex-item">
-                            <text class="size-12 omit omit-1">
-                              {{
-                                index === TagTypeEnum.resourceRegion
-                                  ? lowRegions[resourceRegionIndex].tagName
-                                  : index === TagTypeEnum.industryLocation
-                                  ? industryLocation[industryLocationIndex]
-                                      .tagName
-                                  : index === TagTypeEnum.resourceArea
-                                  ? resourceArea[resourceAreaIndex].tagName
-                                  : servicePack[servicePackIndex].tagName
-                              }}
-                            </text>
+                      <view class="pick-box">
+                        <picker
+                          @change="bindPickerChange"
+                          :data-index="index"
+                          :value="
+                            index === TagTypeEnum.resourceRegion
+                              ? resourceRegionIndex
+                              : index === TagTypeEnum.industryLocation
+                              ? industryLocationIndex
+                              : index === TagTypeEnum.resourceArea
+                              ? resourceAreaIndex
+                              : servicePackIndex
+                          "
+                          :range="
+                            index === TagTypeEnum.resourceRegion
+                              ? lowRegions
+                              : index === TagTypeEnum.industryLocation
+                              ? industryLocation
+                              : index === TagTypeEnum.resourceArea
+                              ? resourceArea
+                              : servicePack
+                          "
+                          range-key="label"
+                        >
+                          <view class="flex">
+                            <view class="flex-item">
+                              <text class="size-12 omit omit-1">
+                                {{
+                                  index === TagTypeEnum.resourceRegion
+                                    ? lowRegions[resourceRegionIndex].tagName
+                                    : index === TagTypeEnum.industryLocation
+                                    ? industryLocation[industryLocationIndex]
+                                        .tagName
+                                    : index === TagTypeEnum.resourceArea
+                                    ? resourceArea[resourceAreaIndex].tagName
+                                    : servicePack[servicePackIndex].tagName
+                                }}
+                              </text>
+                            </view>
+                            <view class="text-right">
+                              <text
+                                class="ieb ieb-down size-12 pull-right blod"
+                              ></text>
+                            </view>
                           </view>
-                          <view class="text-right">
-                            <text
-                              class="ieb ieb-down size-12 pull-right blod"
-                            ></text>
-                          </view>
-                        </view>
-                      </picker>
+                        </picker>
+                      </view>
                     </view>
-                  </view>
+                  </block>
                 </view>
 
                 <view class="whitespace-md dark"></view>
@@ -143,8 +146,8 @@
                         <view class="omit omit-1 mt5" v-if="tabIndex < 2">
                           <text
                             class="default-tag"
-                            v-for="(log, index1) in item.tags"
-                            :key="log.index"
+                            v-for="(log, idx) in item.tags"
+                            :key="idx"
                             >{{ log }}</text
                           >
                         </view>
@@ -249,7 +252,7 @@ export default {
       tabIndex2: 0,
       tabsButton: ["空间资源", "创新资源", "配套资源"],
       down: false,
-      tagName: String,
+      tagName: "",
       selectDatas: [],
 
       mapData: [
@@ -324,7 +327,7 @@ export default {
       },
 
       pageIndex: "",
-      showFooter: {},
+      showFooter: true,
       loadingHidden: false,
       refreshertriggered: false,
       info: "",
@@ -332,23 +335,15 @@ export default {
       tags: "",
       industryLocationArrValue: [],
 
-      industryLocation: {
-        tagName: "",
-      },
+      industryLocation: [{ tagName: "不限", label: "不限", children: [] }],
 
-      resourceArea: {
-        tagName: "",
-      },
+      resourceArea: [{ tagName: "不限", label: "不限", children: [] }],
 
-      servicePack: {
-        tagName: "",
-      },
+      servicePack: [{ tagName: "不限", label: "不限", children: [] }],
 
-      lowRegions: {
-        tagName: "",
-      },
+      lowRegions: [{ tagName: "不限", label: "不限", children: [] }],
 
-      fullLowRegions: "",
+      fullLowRegions: [],
 
       log: {
         index: "",
@@ -380,7 +375,9 @@ export default {
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {},
+  onShow: function () {
+    console.log(this);
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */
@@ -392,12 +389,7 @@ export default {
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
-    console.log("页面相关事件处理函数--监听用户下拉动作");
-    this.getSpaceResourcePage({
-      pageIndex: 1,
-    });
-  },
+  onPullDownRefresh: function () {},
   /**
    * 页面上拉触底事件的处理函数
    */
@@ -724,6 +716,7 @@ export default {
          * 位置
          */
         let resourceRegionName = lowRegions[value].tagValue;
+        console.log("resourceRegionName", resourceRegionName);
         this.getSpaceResourcePage({ resourceRegionName });
         this.setData({ resourceRegionIndex: value, resourceRegionName });
       } else if (index === TagTypeEnum.industryLocation) {
@@ -862,7 +855,6 @@ export default {
           loadingHidden: true,
           refreshertriggered: false, // 结束下拉刷新状态
         });
-
         this.setData({
           info,
           mapData: info.items,
@@ -960,7 +952,9 @@ export default {
               if (s.parentId === item.id) {
                 s = {
                   ...s,
-                  label: s.tagName + "(" + s.resourceCount + ")",
+                  label: s.tagName
+                    ? s.tagName + "(" + s.resourceCount + ")"
+                    : "",
                   value: parseInt(s.tagValue, 10),
                 };
                 item.children.push(s);
@@ -968,10 +962,13 @@ export default {
             });
             return (item = {
               ...item,
-              label: item.tagName + "(" + item.resourceCount + ")",
+              label: item.tagName
+                ? item.tagName + "(" + item.resourceCount + ")"
+                : "",
               value: parseInt(item.tagValue, 10),
             });
           });
+
         tags["LOCATION/CHANYDW"] = industryLocation;
 
         (tags["INDUSTRIAL/YONGDMJ"] || []).map((item) => {
@@ -1145,17 +1142,18 @@ export default {
       }
     },
 
-    onReachBottom() {
+    lower() {
       this.getSpaceResourcePage({
         pageIndex: this.pageIndex + 1,
       });
     },
 
-    onPullDownRefresh() {
-      console.log("占位：函数 onPullDownRefresh");
+    pulldown() {
+      console.log("占位：函数 pulldown");
       this.getSpaceResourcePage({
         pageIndex: 1,
       });
+      uni.stopPullDownRefresh(); //刷新数据之后停止刷新效果
     },
 
     readItem() {
