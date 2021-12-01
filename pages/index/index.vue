@@ -468,7 +468,7 @@ export default {
       const years = year || state.years;
       const amounts = amount || state.amounts;
       windowW = state.imageWidth * 0.88;
-      console.log("amounts", amounts);
+
       new wxCharts({
         canvasId: "columnCanvas",
         categories: years,

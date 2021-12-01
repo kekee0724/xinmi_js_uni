@@ -313,7 +313,6 @@ export default {
       fullLowRegions: [],
 
       isChecked: false,
-
     };
   },
   /**
@@ -581,9 +580,8 @@ export default {
       let id = e.detail.markerId;
       const state = this,
         mapData = state.mapData;
-      let resourceTypeValue = mapData.find(
-        (item) => item.id === id
-      ).resourceTypeValue;
+      let find = mapData.find((item) => item.id === id);
+      let resourceTypeValue = find.resourceTypeValue;
       uni.navigateTo({
         url: `/xinmi/details/details?markerId=${e.detail.markerId}&resourceTypeValue=${resourceTypeValue}`,
       });
@@ -852,7 +850,7 @@ export default {
         });
         let resourceType = tags;
         resourceType = resourceType.filter((v) => v.resourceTypeValue !== "4");
-        console.log("resourceType", resourceType)
+        console.log("resourceType", resourceType);
         resourceType = resourceType.map((item) => {
           item.tagName = item.resourceType;
           item.tagValue = item.resourceTypeValue;
