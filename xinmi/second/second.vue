@@ -27,10 +27,11 @@
               @change="bindPickerChange"
               :value="resourceRegionIndex"
               :range="lowRegions"
+              v-if="lowRegions.length > 0"
               range-key="tagName"
               :data-index="0"
             >
-              {{ lowRegions[resourceRegionIndex].tagName || info.resourceName }}
+              {{ info.resourceName }}
               <text class="ieb ieb-down size-12 pull-right blod"></text>
             </picker>
           </view>
@@ -392,7 +393,7 @@ export default {
 
       servicePack: [{ tagName: "不限", label: "不限", children: [] }],
 
-      lowRegions: [{ tagName: "不限", label: "不限", children: [] }],
+      lowRegions: [],
 
       lowMap: [],
       path: [],
@@ -417,7 +418,7 @@ export default {
    */
   onLoad: function (options) {
     this.getLowRegion(options.markerId);
-    this.createQrCode(options.markerId);
+    // this.createQrCode(options.markerId);
     this.getImportantIndustry();
     this.setData({
       imageWidth: uni.getSystemInfoSync().windowWidth,
@@ -483,6 +484,8 @@ export default {
     createQrCode(markerId) {
       uni.cloud
         .callFunction({
+          // 请求云函数
+          // 云函数getQRCode
           name: "getQRCode",
           data: {
             markerId,
@@ -498,33 +501,25 @@ export default {
 
     showPic: function () {
       uni.previewImage({
+        // 小程序码,生成后直接预览,前台展示
         urls: [this.image],
         current: this.image,
       });
     },
 
     mapMaker: function (mapDatas, cities) {
-      var _a;
-
       let markerList = [];
       let customList = [];
-      let state = this;
-      let mapData =
-        mapDatas ||
-        ((_a = state.infos) === null || _a === void 0 ? void 0 : _a.items) ||
-        state.mapData ||
-        [];
-      let lowMap = state.lowMap || [];
-      if (mapData === null || mapData === void 0) {
-        mapData = void 0;
-      } else {
-        mapData = mapData.concat(lowMap);
-      }
-
+      // 新密市坐标行政区边界
+      let state = this,
+        mapData = mapDatas || state.infos.items || state.mapData || [],
+        lowMap = state.lowMap || [];
+      mapData = mapData.concat(lowMap);
+      // let show = mapData.length === lowMap.length
       console.log(mapData, lowMap);
       mapData.map((item, _i) => {
         markerList.push({
-          iconPath: "https://webapi.amap.com/theme/v1.3/markers/n/mark_b.png",
+          iconPath: "https://webapi.amap.com/theme/v1.3/markers/n/mark_b.png", // connectlocalUrl("marker.svg"),
           id: item.id,
           longitude: item.longitude || 113.3878554069446,
           latitude: item.latitude || 34.58342945110673,
@@ -533,6 +528,7 @@ export default {
             color: "#fff",
             fontSize: 12,
             borderRadius: 3,
+            // 'BYCLICK':点击显示; 'ALWAYS':常显
             display: item.id ? "BYCLICK" : "ALWAYS",
             bgColor: "#3399ff",
             padding: 6,
@@ -580,23 +576,37 @@ export default {
       });
     },
 
+    /**
+     * marker点击事件
+     */
     markertap(e) {
-      var _a;
-
+      /**
+       * 手机上
+       */
       let id = e.detail.markerId;
-
       if (id) {
-        const state = this;
-        const mapData = state.mapData;
-        let resourceTypeValue =
-          (_a = mapData.find((item) => item.id === id)) === null ||
-          _a === void 0
-            ? void 0
-            : _a.resourceTypeValue;
+        const state = this,
+          mapData = state.mapData;
+        let resourceTypeValue = mapData.find(
+          (item) => item.id === id
+        ).resourceTypeValue;
         uni.navigateTo({
           url: `/xinmi/details/details?markerId=${e.detail.markerId}&resourceTypeValue=${resourceTypeValue}`,
         });
       }
+      /**
+       * 开发工具调试 开发者工具上获取的markerId并非绑定的id
+       */
+      // let index = e.detail.markerId - 900000000;
+      // const state = this,
+      //   mapData = state.mapData;
+      // index = index % mapData.length;
+      // let id = mapData[index].id,
+      //   resourceTypeValue = mapData[index].resourceTypeValue;
+      // console.log(index, id)
+      // uni.navigateTo({
+      //   url: `/xinmi/details/details?markerId=${id}&resourceTypeValue=${resourceTypeValue}`
+      // })
     },
 
     changTabs: function (e) {
@@ -631,11 +641,8 @@ export default {
       });
     },
 
+    //   标签选中效果
     selectIndex: function (e, idx) {
-      var _a;
-
-      var _b;
-
       this.setData({
         industryLocationIndex: 0,
         resourceAreaIndex: 0,
@@ -647,21 +654,14 @@ export default {
         servicePackValues: "",
         tabIndex2: 0,
       });
+
       const index = idx
         ? +idx
-        : (
-            ((e === null || e === void 0
-              ? (_a = void 0)
-              : (_a = e.currentTarget)) === null || _a === void 0
-              ? (_b = void 0)
-              : (_b = _a.dataset)) === null || _b === void 0
-              ? void 0
-              : _b.index
-          )
+        : e.currentTarget.dataset.index
         ? e.currentTarget.dataset.index
         : 0;
-      this.resourceTypeCount(index);
 
+      this.resourceTypeCount(index);
       if (index !== 0) {
         this.setData({
           tabIndex: index,
@@ -674,108 +674,84 @@ export default {
       }
     },
 
+    //   标签选中效果
     selectIndex2: function (e) {
-      var _a;
-
       let index = e.currentTarget.dataset.index;
       this.getTags(null, null, index);
-      let resourceTypeValues =
-        (_a = this.resourceType[index]) === null || _a === void 0
-          ? void 0
-          : _a.resourceTypeValue;
-      this.getSpaceResourcePage({
-        resourceTypeValues,
-      });
+      let resourceTypeValues = this.resourceType[index].resourceTypeValue;
+      this.getSpaceResourcePage({ resourceTypeValues });
       this.setData({
         tabIndex2: index,
         resourceTypeValues,
       });
     },
 
+    // 选择器
     bindPickerChange: function (e) {
       const state = this;
-      let lowRegions = state.lowRegions;
-      let industryLocation = state.industryLocation;
-      let resourceArea = state.resourceArea;
-      let servicePack = state.servicePack;
-      let tabIndex = this.tabIndex;
+      let lowRegions = state.lowRegions,
+        industryLocation = state.industryLocation,
+        resourceArea = state.resourceArea,
+        servicePack = state.servicePack,
+        tabIndex = this.tabIndex;
       this.setData({
         index: e.detail.value,
       });
-      const index = e.currentTarget.dataset.index;
-      const value = +e.detail.value;
-      let resourceRegionName = lowRegions[+e.detail.value].tagValue;
+      const index = e.currentTarget.dataset.index,
+        value = +e.detail.value;
 
-      if (+tabIndex > 0 && index === TagTypeEnum.resourceRegion) {
+      let resourceRegionName = lowRegions[+e.detail.value].tagValue;
+      if (+tabIndex > 0 && index === TagTypeEnum.resourceRegion)
         this.resourceTypeCount(this.tabIndex, resourceRegionName);
-      }
 
       if (index === TagTypeEnum.resourceRegion) {
         let resourceRegionName = lowRegions[value].tagValue;
+        /**
+         * 位置
+         */
         this.getLowRegion(lowRegions[value].id);
-        this.getSpaceResourcePage({
-          resourceRegionName,
-        });
-        this.setData({
-          resourceRegionIndex: value,
-          resourceRegionName,
-        });
-      } else {
-        if (index === TagTypeEnum.industryLocation) {
-          let industryLocationValues =
-            industryLocation[value].tagFullValues ||
-            industryLocation[value].tagValue;
-          this.getSpaceResourcePage({
-            industryLocationValues,
-          });
-          this.setData({
-            industryLocationIndex: value,
-            industryLocationValues,
-          });
-        } else {
-          if (index === TagTypeEnum.resourceArea) {
-            let tagValue = resourceArea[value].tagValue || "";
-            let data = {
-              resourceAreaBegin: "",
-              resourceAreaEnd: "",
-            };
-
-            if (tagValue.endsWith("d")) {
-              data = {
-                resourceAreaBegin: "",
-                resourceAreaEnd: tagValue.split("d")[0],
-              };
-            } else {
-              if (tagValue.endsWith("u")) {
-                data = {
-                  resourceAreaBegin: tagValue.split("u")[0],
-                  resourceAreaEnd: "",
-                };
-              } else {
-                if (tagValue.length > 0) {
-                  data = {
-                    resourceAreaBegin: tagValue.split("-")[0],
-                    resourceAreaEnd: tagValue.split("-")[1],
-                  };
-                }
-              }
-            }
-            this.getSpaceResourcePage(data);
-            this.setData({ resourceAreaIndex: value, ...data });
-          } else {
-            /**
-             * 服务配套
-             */
-            let servicePackValues = servicePack[value].tagValue;
-            this.getSpaceResourcePage({
-              servicePackValues,
-            });
-            this.setData({
-              servicePackIndex: value,
-              servicePackValues,
-            });
-          }
+        this.getSpaceResourcePage({ resourceRegionName });
+        this.setData({ resourceRegionIndex: value, resourceRegionName });
+      } else if (index === TagTypeEnum.industryLocation) {
+        /**
+         * 产业定位
+         */
+        let industryLocationValues =
+          industryLocation[value].tagFullValues ||
+          industryLocation[value].tagValue;
+        this.getSpaceResourcePage({ industryLocationValues });
+        this.setData({ industryLocationIndex: value, industryLocationValues });
+      } else if (index === TagTypeEnum.resourceArea) {
+        /**
+         * 用地面积
+         */
+        let tagValue = resourceArea[value].tagValue || "";
+        let data = { resourceAreaBegin: "", resourceAreaEnd: "" };
+        if (tagValue.endsWith("d")) {
+          data = {
+            resourceAreaBegin: "",
+            resourceAreaEnd: tagValue.split("d")[0],
+          };
+        } else if (tagValue.endsWith("u")) {
+          data = {
+            resourceAreaBegin: tagValue.split("u")[0],
+            resourceAreaEnd: "",
+          };
+        } else if (tagValue.length > 0) {
+          data = {
+            resourceAreaBegin: tagValue.split("-")[0],
+            resourceAreaEnd: tagValue.split("-")[1],
+          };
         }
+        this.getSpaceResourcePage(data);
+        this.setData({ resourceAreaIndex: value, ...data });
+      } else {
+        /**
+         * 服务配套
+         */
+        let servicePackValues = servicePack[value].tagValue;
+        this.getSpaceResourcePage({ servicePackValues });
+        this.setData({ servicePackIndex: value, servicePackValues });
       }
     },
 
