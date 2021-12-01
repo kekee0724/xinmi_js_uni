@@ -4,7 +4,7 @@
       :showFooter="showFooter"
       class="phone-body"
       @lower="onReachBottom"
-      @pulldown="onPullDownRefresh"
+      @pulldown="pulldown"
       :refreshertriggered="refreshertriggered"
     >
       <view class="map-box">
@@ -393,7 +393,7 @@ export default {
 
       servicePack: [{ tagName: "不限", label: "不限", children: [] }],
 
-      lowRegions: [],
+      lowRegions: [{ tagName: "不限", label: "不限", children: [] }],
 
       lowMap: [],
       path: [],
@@ -411,6 +411,7 @@ export default {
       industryNameValue: "",
       industry: "",
       resourceRegionList: [],
+      index: 0,
     };
   },
   /**
@@ -1180,8 +1181,23 @@ export default {
       console.log("占位：函数 onReachBottom 未声明");
     },
 
-    onPullDownRefresh() {
-      console.log("占位：函数 onPullDownRefresh 未声明");
+    pulldown: function () {
+      this.setData({
+        refreshertriggered: true, // 下拉刷新状态
+      });
+
+      let state = this;
+      let tabIndex = state.tabIndex;
+      if (tabIndex) {
+        this.getSpaceResourcePage({
+          pageIndex: 1,
+        });
+      }
+      if (!tabIndex) {
+        this.setData({
+          refreshertriggered: false,
+        });
+      }
     },
 
     readItem() {
