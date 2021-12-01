@@ -317,22 +317,20 @@ export default {
         },
       ],
 
-      show: {},
-      resourceTypeValues: {},
+      show: false,
+      resourceTypeValues: Number,
       industryLocationLabel: "",
       industryLocationArr: [],
 
-      resourceList: {
-        length: 0,
-      },
+      resourceList: [],
 
-      pageIndex: "",
+      pageIndex: Number,
       showFooter: true,
       loadingHidden: false,
       refreshertriggered: false,
-      info: "",
-      resourceType: {},
-      tags: "",
+      info: {},
+      resourceType: [],
+      tags: {},
       industryLocationArrValue: [],
 
       industryLocation: [{ tagName: "不限", label: "不限", children: [] }],
@@ -345,16 +343,8 @@ export default {
 
       fullLowRegions: [],
 
-      log: {
-        index: "",
-      },
-
       isChecked: false,
 
-      tag: {
-        idx: "",
-        tagName: "",
-      },
     };
   },
   /**
