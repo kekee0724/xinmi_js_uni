@@ -11,12 +11,14 @@
         <map
           id="myMap"
           style="width: 100%; height: 800rpx"
-          :longitude="longitude"
+          :scale="10"
+          :polyline="polygons"
           :latitude="latitude"
-          :setting="setting"
+          :longitude="longitude"
+          :show-location="true"
           :markers="markers"
           @regionchange="handleRegionchange"
-          :polygons="polygons"
+          @markertap="markertap"
           @callouttap="markertap"
         ></map>
         <view class="map-search">
