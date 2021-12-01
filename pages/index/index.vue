@@ -220,10 +220,10 @@ const {
   resourceRegionHttpService,
 } = require("./service/index.service");
 
-var windowW = 0;
-var windowH = 0;
+let windowW = 0;
+// let windowH = 0;
 
-var wxCharts = require("../../js/wxcharts-min");
+let wxCharts = require("../../js/wxcharts-min");
 
 export default {
   data() {

@@ -197,7 +197,7 @@
             <view class="body">
               <text
                 :class="
-                  'tag ' +
+                  'omit omit-1 tag ' +
                   (selectDatas[index].tag[idx].isChecked ? 'active' : '')
                 "
                 @click="selectChange"
@@ -214,10 +214,10 @@
       </view>
       <view class="weui-flex footer flex-collapse">
         <view class="weui-flex__item">
-          <a class="weui-btn weui-btn_primary" @click.native="reset">重置</a>
+          <a class="weui-btn weui-btn_primary" @click="reset">重置</a>
         </view>
         <view class="weui-flex__item">
-          <a class="weui-btn weui-btn_primary" @click.native="submit">确定</a>
+          <a class="weui-btn weui-btn_primary" @click="submit">确定</a>
         </view>
       </view>
     </view>
