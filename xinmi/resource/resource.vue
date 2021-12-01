@@ -521,7 +521,7 @@ export default {
           callout: {
             content: item.name + " >>",
             color: "#fff",
-            fontSize: 12,
+            fontSize: 10,
             borderRadius: 3,
             // 'BYCLICK':点击显示; 'ALWAYS':常显
             display: "BYCLICK",
@@ -796,6 +796,9 @@ export default {
           item.name = item.resourceName;
           item.longitude = item.itude ? +item.itude.split(",")[0] : "";
           item.latitude = item.itude ? +item.itude.split(",")[1] : "";
+          while (item.latitude > 90) {
+            item.latitude = item.latitude / 10;
+          }
           return item;
         });
 

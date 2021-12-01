@@ -82,7 +82,7 @@
               <view
                 class="text-list"
                 v-for="(item, index) in industryCompetitiveness"
-                :key="item.index"
+                :key="index"
               >
                 <view class="li" v-if="item">{{ item }}</view>
               </view>
@@ -173,7 +173,7 @@
               class="card dark"
               :url="'/xinmi/second/second?markerId=' + item.resourceId"
               v-for="(item, index) in resourceRegionList"
-              :key="item.index"
+              :key="index"
             >
               <view class="flex">
                 <view class="flex-item">
@@ -181,8 +181,8 @@
                   <view class="omit omit-1 mt20">
                     <text
                       class="default-tag"
-                      v-for="(t, index1) in item.industryLocations"
-                      :key="t.index"
+                      v-for="(t, idx) in item.industryLocations"
+                      :key="idx"
                       >{{ t }}</text
                     >
                   </view>
@@ -350,27 +350,28 @@ export default {
           callout: {
             content: item.name + " >>",
             color: "#fff", //文本颜色
-            fontSize: 12, //文字大小
+            fontSize: 10, //文字大小
             borderRadius: 3, //callout边框圆角
             display: "ALWAYS", //'BYCLICK':点击显示; 'ALWAYS':常显
             bgColor: "#3399ff", //背景色
             padding: 6, //文本边缘留白
-            textAlign: "left", //文本对齐方式。有效值: left, right, center
+            textAlign: "center", //文本对齐方式。有效值: left, right, center,
+            // anchorY: 10,
           },
-          label: {
-            //为标记点旁边增加标签
-            content: "", //标记点旁边的文字
-            color: "#ff6600", //文本颜色
-            fontSize: 16, //文字大小
-            x: 0, //label的坐标，原点是 marker 对应的经纬度
-            y: 0, //label的坐标，原点是 marker 对应的经纬度
-            borderWidth: 1, //边框宽度
-            borderColor: "", //边框颜色
-            borderRadius: 10, //边框圆角
-            bgColor: "red",
-            padding: 6, //	文本边缘留白
-            textAlign: "left", //文本对齐方式。有效值: left, right, center
-          },
+          // label: {
+          //   //为标记点旁边增加标签
+          //   content: "", //标记点旁边的文字
+          //   color: "#ff6600", //文本颜色
+          //   fontSize: 12, //文字大小
+          //   x: 0, //label的坐标，原点是 marker 对应的经纬度
+          //   y: 0, //label的坐标，原点是 marker 对应的经纬度
+          //   borderWidth: 1, //边框宽度
+          //   borderColor: "", //边框颜色
+          //   borderRadius: 10, //边框圆角
+          //   bgColor: "red",
+          //   padding: 6, //	文本边缘留白
+          //   textAlign: "left", //文本对齐方式。有效值: left, right, center
+          // },
           width: 18,
           height: 24,
           anchor: {
@@ -426,7 +427,7 @@ export default {
 
     //地图点击事件
     markertap(e) {
-      console.log("你点击的标记点ID是:" + e.detail.markerId);
+      console.log("你点击的标记点id是:" + e.detail.markerId);
       console.log(e);
       uni.navigateTo({
         url: `/xinmi/second/second?markerId=${e.detail.markerId}`,
