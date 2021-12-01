@@ -1148,12 +1148,16 @@ export default {
       });
     },
 
-    pulldown() {
-      console.log("占位：函数 pulldown");
+    pulldown(e) {
+      console.log("pulldown");
+      this.setData({
+        refreshertriggered: true, // 下拉刷新状态
+      });
+
       this.getSpaceResourcePage({
         pageIndex: 1,
       });
-      uni.stopPullDownRefresh(); //刷新数据之后停止刷新效果
+      // uni.stopPullDownRefresh(); //刷新数据之后停止刷新效果
     },
 
     readItem() {

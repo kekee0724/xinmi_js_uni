@@ -2,6 +2,7 @@
   <view>
     <scroll-view
       class="height-full"
+      :scrollTop="scrollTop"
       :scroll-y="true"
       :refresher-triggered="srefreshertriggered"
       :refresher-enabled="refresher"
@@ -25,7 +26,7 @@ export default {
       footerContent: "没有更多内容了~",
       srefreshertriggered: false,
       refresher: true,
-      scrollTop: "",
+      scrollTop: 0,
       touchStart: false,
       startOffsetTop: "",
     };
@@ -42,22 +43,17 @@ export default {
     },
   },
   watch: {
-    refresher: function () {
-      this.refresher = !this.refreshdisable;
-    },
-
     refreshertriggered_refreshdisable: {
       handler: function (newValue, oldValue) {
         const { refreshertriggered, refreshdisable } = newValue;
-        console.log("watch", newValue, oldValue);
+        console.log("观察refreshertriggered变化", newValue, oldValue);
         this.setData({
-          srefreshertriggered: false,
+          srefreshertriggered: refreshertriggered,
           refresher: refreshdisable ? false : true,
         });
       },
-
-      immediate: true,
-      deep: true,
+      //   immediate: true,
+      //   deep: true,
     },
   },
   methods: {
@@ -69,12 +65,12 @@ export default {
         scrolltoupper: top < 5 ? true : false,
       });
     },
-    scrolltoupperFun: function () {
+    scrolltoupperFun: function (e) {
       this.setData({
         scrolltoupper: true,
       });
     },
-    loadMore: function () {},
+    loadMore: function (e) {},
     touchStartFun: function (e) {
       this.setData({
         touchStart: true,
@@ -97,7 +93,6 @@ export default {
   computed: {
     refreshertriggered_refreshdisable() {
       const { refreshertriggered, refreshdisable } = this;
-      console.log("computed", refreshertriggered, refreshdisable);
       return {
         refreshertriggered,
         refreshdisable,
