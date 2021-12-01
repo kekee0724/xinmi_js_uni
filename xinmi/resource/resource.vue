@@ -255,38 +255,7 @@ export default {
       tagName: "",
       selectDatas: [],
 
-      mapData: [
-        {
-          id: "0",
-          name: "曲梁镇",
-          longitude: "113.390891",
-          latitude: "34.539443",
-        },
-        {
-          id: "1",
-          name: "超化镇",
-          longitude: "113.407986",
-          latitude: "34.449421",
-        },
-        {
-          id: "2",
-          name: "大槐镇",
-          longitude: "112.230887",
-          latitude: "22.077016",
-        },
-        {
-          id: "3",
-          name: "岳村镇",
-          longitude: "113.494952",
-          latitude: "34.551906",
-        },
-        {
-          id: "4",
-          name: "青屏街街道",
-          longitude: "113.370114",
-          latitude: "34.54251",
-        },
-      ],
+      mapData: [],
 
       index: 0,
       type: false,
@@ -298,12 +267,12 @@ export default {
 
       setting: {
         scale: "9.8",
-        longitude: 113.45774682330259,
-        latitude: 34.542725600927795,
+        longitude: 113.42507561061822,
+        latitude: 34.54309932463642,
       },
 
-      longitude: 113.45774682330259,
-      latitude: 34.542725600927795,
+      longitude: 113.42507561061822,
+      latitude: 34.54309932463642,
       tagList: ["新材料"],
 
       tabs: [
@@ -882,7 +851,8 @@ export default {
           resourceStatus: 999,
         });
         let resourceType = tags;
-        resourceType = resourceType.filter((v) => v.resourceTypeValue == "4");
+        resourceType = resourceType.filter((v) => v.resourceTypeValue !== "4");
+        console.log("resourceType", resourceType)
         resourceType = resourceType.map((item) => {
           item.tagName = item.resourceType;
           item.tagValue = item.resourceTypeValue;

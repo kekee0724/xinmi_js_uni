@@ -1,7 +1,7 @@
 <template>
   <view class="weui-uploader__bd">
     <view class="weui-uploader__files" id="uploaderFiles">
-      <block v-for="(item, index) in files" :key="item.url">
+      <block v-for="(item, index) in files" :key="index">
         <view
           class="weui-uploader__file"
           v-if="!item.isdel && index === 0"
@@ -10,7 +10,7 @@
         >
           <image
             class="weui-uploader__img"
-            :src="item.url || '@/static/components/picture/error.png'"
+            :src="item.url"
             mode="aspectFill"
           />
           <text
@@ -22,10 +22,10 @@
         </view>
       </block>
       <block v-if="files.length === 0">
-        <view class="weui-uploader__file" @click="previewImage" :id="item.url">
+        <view class="weui-uploader__file">
           <image
             class="weui-uploader__img"
-            :src="'@/static/components/picture/error.png'"
+            :src="'../../static/components/picture/error.png'"
             mode="aspectFill"
           />
           <text
@@ -51,7 +51,7 @@ const { pictureService } = require("../../core/service/picture.service");
 export default {
   data() {
     return {
-      files: [{url:""}],
+      files: [],
       uid: "",
       uploadsuccess: true,
       localImage: {

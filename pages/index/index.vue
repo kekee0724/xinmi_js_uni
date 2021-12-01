@@ -242,12 +242,12 @@ export default {
 
       setting: {
         scale: "9.8",
-        longitude: "113.45774682330259",
-        latitude: "34.542725600927795",
+        longitude: "113.42507561061822",
+        latitude: "34.54309932463642",
       },
 
-      longitude: 113.45774682330259,
-      latitude: 34.542725600927795,
+      longitude: 113.42507561061822,
+      latitude: 34.54309932463642,
       tagList: ["新材料"],
 
       tabs: [
