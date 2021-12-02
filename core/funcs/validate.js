@@ -169,7 +169,6 @@ export const Validators = {
   },
   ValidatorControl(...validators) {
     const presentValidators = validators.filter(isPresent);
-
     if (presentValidators.length === 0) return null;
 
     return function () {

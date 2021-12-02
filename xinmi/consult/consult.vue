@@ -272,7 +272,7 @@ export default {
         if (interval) {
           return;
         }
-        const msg = this.checkMobile();
+        const msg = this.checkMobile()();
         if (msg) {
           uni.showToast({
             title: msg.join(),
@@ -358,7 +358,8 @@ export default {
      * 点击提交按钮
      */
     submit() {
-      const msg = this.validator();
+      const msg = this.validator()();
+      console.log(msg);
       if (msg) {
         uni.showToast({
           title: msg.join(),
