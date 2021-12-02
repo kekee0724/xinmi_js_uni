@@ -68,12 +68,12 @@
         <view></view>
       </view>
       <block v-if="selected == 0">
-        <picture
+        <uni-picture
           class="images-auto kk"
           :tableId="info.resourceId"
           tableName="BILocationResource"
           :readonly="true"
-        ></picture>
+        ></uni-picture>
         <view class="whitespace-md dark"></view>
         <view class="list-card">
           <view class="card dark">

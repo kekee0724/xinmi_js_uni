@@ -8,6 +8,12 @@
           tableName="BILocationResource"
           :readonly="true"
         ></uni-picture>
+        <!-- <image src="@/static/images/bkg.jpg" style="width: 100%"></image> -->
+        <!-- <view class="vr-box">
+          <image src="@/static/images/vr.svg"></image>
+          <text class="blod mr10">VR</text>
+          <text class="ieb ieb-right size-12 blod"></text>
+        </view> -->
       </view>
       <view class="weui-cells weui-cells_after-title">
         <view class="weui-cell weui-cell_example">
