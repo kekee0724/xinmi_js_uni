@@ -36,7 +36,7 @@
               <text
                 class="link-color"
                 @click="callPhone"
-                style="flex: 8; line-height: 12rpx"
+                style="flex: 8; line-height: 32rpx"
               >
                 {{ contactTel }}
               </text>
@@ -127,11 +127,12 @@
           <map
             class="map"
             id="map"
-            :longitude="longitude"
             :latitude="latitude"
+            :longitude="longitude"
             :show-location="true"
             :markers="markers"
-            @markertap="makertap"
+            @markertap="markertap"
+            @callouttap="markertap"
           ></map>
         </view>
         <view class="map_text">
@@ -287,7 +288,7 @@ export default {
           iconPath: "./marker.png",
           location: this.itude, // '121.582081,31.199291',
           success: function (data) {
-            markersData = data.markers;
+            let markersData = data.markers;
             let poisData = data.poisData;
             let markers_new = [];
             markersData.forEach(function (item, _index) {
@@ -300,6 +301,7 @@ export default {
                 height: item.height,
               });
             });
+			console.log(markersData,markers_new)
             if (markersData.length > 0) {
               that.setData({
                 markers: markers_new,
