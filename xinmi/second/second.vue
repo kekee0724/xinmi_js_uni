@@ -3,7 +3,7 @@
     <super-scroll-view
       :showFooter="showFooter"
       class="phone-body"
-      @lower="onReachBottom"
+      @lower="lower"
       @pulldown="pulldown"
       :refreshertriggered="refreshertriggered"
     >
@@ -290,13 +290,13 @@
                       </view>
                     </view>
                     <view class="vr-tag">
-                      <picture
+                      <uni-picture
                         class="images-auto"
                         :tableId="item.id"
                         tableName="BILocationResource"
                         :readonly="true"
                         :maxLength="1"
-                      ></picture>
+                      ></uni-picture>
                     </view>
                   </view>
                 </navigator>
@@ -519,7 +519,7 @@ export default {
         lowMap = state.lowMap || [];
       mapData = mapData.concat(lowMap);
       // let show = mapData.length === lowMap.length
-      console.log(mapData, lowMap);
+      // console.log(mapData, lowMap);
       mapData.map((item, _i) => {
         markerList.push({
           iconPath: "https://webapi.amap.com/theme/v1.3/markers/n/mark_b.png", // connectlocalUrl("marker.svg"),
@@ -529,7 +529,7 @@ export default {
           callout: {
             content: item.name + " >>",
             color: "#fff",
-            fontSize: 12,
+            fontSize: 10,
             borderRadius: 3,
             // 'BYCLICK':点击显示; 'ALWAYS':常显
             display: item.id ? "BYCLICK" : "ALWAYS",
@@ -560,10 +560,14 @@ export default {
           polygons: [
             {
               points: path,
-              strokeWidth: 1,
-              strokeColor: "#3399ff",
-              fillColor: "#3399ff8a",
-              zIndex: 0,
+              // strokeWidth: 1,
+              // strokeColor: "#3399ff",
+              // fillColor: "#3399ff8a",
+              // zIndex: 0,
+              color: "#3399ff", //线的颜色
+              width: 1, //线的宽度
+              dottedLine: false, //是否虚线
+              arrowLine: true, //带箭头的线 开发者工具暂不支持该属性
             },
           ],
         });
@@ -896,16 +900,17 @@ export default {
           item.resourceCount = item.totalCount;
           return item;
         });
-        this.getTags(index, resourceType);
-        resourceType[0].resourceTypeValue &&
+        let firstTypeValue =
+          resourceType.length > 0 ? resourceType[0].resourceTypeValue : "";
+        firstTypeValue && this.getTags(index, resourceType);
+        firstTypeValue &&
           index &&
           this.getSpaceResourcePage({
-            resourceTypeValues: resourceType[0].resourceTypeValue,
+            resourceTypeValues: firstTypeValue,
           });
-
-        (!resourceType[0].resourceTypeValue || +index === 0) &&
+        (!firstTypeValue || +index === 0) &&
           this.setData({
-            infos: {},
+            infos: [],
             resourceList: [],
             showFooter: false,
             customMarkers: [],
@@ -914,7 +919,7 @@ export default {
           });
         this.setData({
           resourceType: resourceType,
-          resourceTypeValues: resourceType[0].resourceTypeValue,
+          resourceTypeValues: firstTypeValue,
           resourceGroup: index || 1,
         });
       } catch (e) {
@@ -1179,23 +1184,28 @@ export default {
       }
     },
 
-    onReachBottom() {
-      console.log("占位：函数 onReachBottom 未声明");
-    },
-
-    pulldown: function () {
-      this.setData({
-        refreshertriggered: true, // 下拉刷新状态
-      });
-
+    lower() {
       let state = this;
       let tabIndex = state.tabIndex;
       if (tabIndex) {
         this.getSpaceResourcePage({
-          pageIndex: 1,
+          pageIndex: this.pageIndex + 1,
         });
       }
-      if (!tabIndex) {
+    },
+
+    pulldown(  ) {
+
+      let state = this;
+      let tabIndex = state.tabIndex;
+      if (tabIndex) {
+        this.setData({
+          refreshertriggered: true, // 下拉刷新状态
+        });
+        this.getSpaceResourcePage({
+          pageIndex: 1,
+        });
+      } else {
         this.setData({
           refreshertriggered: false,
         });
