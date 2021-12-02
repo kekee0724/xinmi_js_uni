@@ -154,7 +154,7 @@ let amapFile = require("../../js/amap-wx"); //如：..­/..­/libs/amap-wx.js
 let config = require("../../js/config");
 const { resourceValueType, resourceTypeEnum } = require("./common");
 const { LocationService } = require("./service/index.service");
-
+let markersData = [];
 export default {
   data() {
     return {
@@ -284,11 +284,11 @@ export default {
           key,
         });
         let params = {
-          iconPathSelected: "./marker_checked.png",
-          iconPath: "./marker.png",
+          iconPathSelected: "https://webapi.amap.com/theme/v1.3/markers/n/mark_b1.png",
+          iconPath: "https://webapi.amap.com/theme/v1.3/markers/n/mark_b.png",
           location: this.itude, // '121.582081,31.199291',
           success: function (data) {
-            let markersData = data.markers;
+            markersData = data.markers;
             let poisData = data.poisData;
             let markers_new = [];
             markersData.forEach(function (item, _index) {
@@ -296,7 +296,7 @@ export default {
                 id: item.id,
                 latitude: item.latitude,
                 longitude: item.longitude,
-                iconPath: item.iconPath,
+                iconPath: item.iconPath, //"https://webapi.amap.com/theme/v1.3/markers/n/mark_b.png",
                 width: item.width,
                 height: item.height,
               });
@@ -333,7 +333,7 @@ export default {
       }
     },
 
-    makertap: function (e) {
+    markertap: function (e) {
       let id = e.detail.markerId;
       this.showMarkerInfo(markersData, id);
       this.changeMarkerColor(markersData, id);
