@@ -361,6 +361,6 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 @import "./uni-picture.css";
 </style>

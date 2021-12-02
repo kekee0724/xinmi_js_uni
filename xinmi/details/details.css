@@ -1,129 +1,129 @@
 /* pages/details/details.wxss */
 .header-banner {
-    height: 480rpx;
-    position: relative;
+  height: 480rpx;
+  position: relative;
 }
 
 .vr-box {
-    position: absolute;
-    width: 232rpx;
-    height: 80rpx;
-    bottom: 30rpx;
-    right: 30rpx;
-    border-radius: 85rpx;
-    background: #8a11d6a1;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  position: absolute;
+  width: 232rpx;
+  height: 80rpx;
+  bottom: 30rpx;
+  right: 30rpx;
+  border-radius: 85rpx;
+  background: #8a11d6a1;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .vr-box image {
-    width: 100rpx;
-    height: 40rpx;
-    margin-right: 15rpx;
+  width: 100rpx;
+  height: 40rpx;
+  margin-right: 15rpx;
 }
 
 .tabset {
-    position: relative;
-    text-align: left;
-    background-color: #fff;
-    font-size: 32rpx;
+  position: relative;
+  text-align: left;
+  background-color: #fff;
+  font-size: 32rpx;
 }
 
 .weui-cells__title {
-    background-color: #fff;
-    position: relative;
-    margin: 0;
-    padding: 30rpx 30rpx 20rpx 50rpx;
-    font-size: 36rpx;
-    color: #000000;
-    font-weight: bold;
+  background-color: #fff;
+  position: relative;
+  margin: 0;
+  padding: 30rpx 30rpx 20rpx 50rpx;
+  font-size: 36rpx;
+  color: #000000;
+  font-weight: bold;
 }
 
 .weui-cells__title::after {
-    content: '';
-    width: 8rpx;
-    height: 40rpx;
-    background-color: #3399ff;
-    position: absolute;
-    border-radius: 45rpx;
-    left: 30rpx;
-    top: 40rpx;
+  content: "";
+  width: 8rpx;
+  height: 40rpx;
+  background-color: #3399ff;
+  position: absolute;
+  border-radius: 45rpx;
+  left: 30rpx;
+  top: 40rpx;
 }
 
 .not-border:before {
-    content: none;
-    opacity: 0 !important;
+  content: none;
+  opacity: 0 !important;
 }
 
 .flex.start {
-    align-items: flex-start;
+  align-items: flex-start;
 }
 
 .ent-list {
-    position: relative;
+  position: relative;
 
-    font-size: 28rpx;
-    padding-left: 20rpx;
-    margin-top: 20rpx;
-    max-height: 300rpx;
-    overflow-y: auto;
-    width: 100%;
+  font-size: 28rpx;
+  padding-left: 20rpx;
+  margin-top: 20rpx;
+  max-height: 300rpx;
+  overflow-y: auto;
+  width: 100%;
 }
 
 .ent-list .item {
-    font-size: 28rpx;
-    color: #999998;
-    padding: 20rpx 0;
+  font-size: 28rpx;
+  color: #999998;
+  padding: 20rpx 0;
 }
 
 .map_container {
-    position: relative;
-    width: 100%;
-    height: 445px;
+  position: relative;
+  width: 100%;
+  height: 445px;
 }
 
 .map {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 .map_text {
-    /* position: absolute; */
-    position: sticky;
-    left: 0;
-    right: 0;
-    bottom: 0px;
-    /* height: 80px; */
-    background: #fff;
-    padding: 0 15px;
+  /* position: absolute; */
+  position: sticky;
+  left: 0;
+  right: 0;
+  bottom: 0px;
+  /* height: 80px; */
+  background: #fff;
+  padding: 0 15px;
 }
 
 .map_text text {
-    margin: 5px 0;
-    display: block;
-    font-size: 12px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
+  margin: 5px 0;
+  display: block;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .h1 {
-    margin: 15px 0;
-    font-size: 15px;
+  margin: 15px 0;
+  font-size: 15px;
 }
 
-.weui-uploader__img {
-    display: block;
-    width: 750rpx;
-    height: 480rpx;
+.header-banner /deep/ .weui-uploader__img {
+  display: block;
+  width: 750rpx;
+  height: 480rpx;
 }
 
 .color-d {
-    color: #3399ff;
+  color: #3399ff;
 }
 
 .default-tag {
-    line-height: 15rpx;
+  line-height: 15rpx;
 }

@@ -223,7 +223,7 @@ ec-canvas {
   height: 168rpx;
 }
 
-.kk .weui-uploader__img {
+.kk /deep/ .weui-uploader__img {
   border-radius: 12rpx;
   display: block;
   width: 690rpx;
