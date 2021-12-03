@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="34" height="34" viewBox="0 0 142 142">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #01b4ff;
+        opacity: 0.7;
+        animation: scale 2s infinite cubic-bezier(0, 0, 0.49, 1.02);
+        animation-delay: 400ms;
+        transition: 0.5s all ease;
+        transform: scale(1);
+        transform-origin: center;
+      }
+      .cls-2 {
+        fill: #01b4ff;
+      }
+      @keyframes scale {
+      0% {
+      transform: scale(1);
+      }
+      50%,
+      75% {
+      transform: scale(2.5);
+      }
+      78%, 100% {
+      opacity: 0;
+      }
+      }
+    </style>
+  </defs>
+  <circle class="cls-1" cx="71.5" cy="70.5" r="21.5"/>
+  <circle class="cls-2" cx="71.5" cy="70.5" r="21.5"/>
+</svg>

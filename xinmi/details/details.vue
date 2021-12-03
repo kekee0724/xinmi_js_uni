@@ -150,8 +150,8 @@
 </template>
 
 <script>
-let amapFile = require("../../js/amap-wx"); //如：..­/..­/libs/amap-wx.js
-let config = require("../../js/config");
+let amapFile = require("../../static/js/amap-wx"); //如：..­/..­/libs/amap-wx.js
+let config = require("../../static/js/config");
 const { resourceValueType, resourceTypeEnum } = require("./common");
 const { LocationService } = require("./service/index.service");
 let markersData = [];
@@ -352,9 +352,9 @@ export default {
       let markers = [];
       for (let j = 0; j < data.length; j++) {
         if (j == i) {
-          data[j].iconPath = "./marker_checked.png";
+          data[j].iconPath = "../../static/images/marker_checked.png";
         } else {
-          data[j].iconPath = "./marker.png";
+          data[j].iconPath = "../../static/images/marker.png";
         }
         markers.push({
           id: data[j].id,
