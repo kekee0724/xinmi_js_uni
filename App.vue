@@ -1,7 +1,7 @@
 <!--
  * @Author: 可可同学
  * @Date: 2021-11-19 15:56:58
- * @LastEditTime: 2021-12-01 22:57:02
+ * @LastEditTime: 2021-12-03 21:33:09
  * @LastEditors: 可可同学
  * @Description: 
 -->
@@ -63,11 +63,11 @@ export default {
     });
 
     if (!wx.cloud) {
-      console.error("请使用 2.2.3 或以上的基础库以使用云能力");
+      console.warn("请使用 2.2.3 或以上的基础库以使用云能力");
     } else {
       wx.cloud.init({
         traceUser: true,
-        env: "dev-7ggxnq4b4540f995",
+        env: "dev-4gju2hza605fd6b2",
       });
     }
   },

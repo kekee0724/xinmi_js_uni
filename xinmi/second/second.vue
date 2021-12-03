@@ -183,16 +183,13 @@
                 </text>
               </view>
               <view class="flex down-box mt15">
-                <block
-                  v-if="
-                    index !== 0 &&
-                    (tabIndex === 1 || (tabIndex === 2 && index !== 2))
-                  "
-                >
+                <block v-for="(item, index) in selectData" :key="index">
                   <view
                     class="flex-item"
-                    v-for="(item, index) in selectData"
-                    :key="index"
+                    v-if="
+                      index !== 0 &&
+                      (tabIndex === 1 || (tabIndex === 2 && index !== 2))
+                    "
                   >
                     <view class="size-12">{{ item }}</view>
 
@@ -421,7 +418,11 @@ export default {
    */
   onLoad: function (options) {
     this.getLowRegion(options.markerId);
-    // this.createQrCode(options.markerId);
+	if (!wx.cloud) {
+	  console.warn("请使用 2.2.3 或以上的基础库以使用createQrCode");
+	} else {
+	  this.createQrCode(options.markerId);
+	}
     this.getImportantIndustry();
     this.setData({
       imageWidth: uni.getSystemInfoSync().windowWidth,
@@ -485,7 +486,7 @@ export default {
   },
   methods: {
     createQrCode(markerId) {
-      uni.cloud
+      wx.cloud
         .callFunction({
           // 请求云函数
           // 云函数getQRCode
@@ -1194,8 +1195,7 @@ export default {
       }
     },
 
-    pulldown(  ) {
-
+    pulldown() {
       let state = this;
       let tabIndex = state.tabIndex;
       if (tabIndex) {
