@@ -81,7 +81,7 @@
                   @click="copyText"
                   :data-text="item.value"
                 >
-                  {{ item.value }}
+                  {{ item.value || "" }}
                 </view>
                 <view class="flex-item gray-three-color" v-else>{{
                   item.value
@@ -284,7 +284,8 @@ export default {
           key,
         });
         let params = {
-          iconPathSelected: "https://webapi.amap.com/theme/v1.3/markers/n/mark_b1.png",
+          iconPathSelected:
+            "https://webapi.amap.com/theme/v1.3/markers/n/mark_b1.png",
           iconPath: "https://webapi.amap.com/theme/v1.3/markers/n/mark_b.png",
           location: this.itude, // '121.582081,31.199291',
           success: function (data) {
@@ -301,7 +302,7 @@ export default {
                 height: item.height,
               });
             });
-			console.log(markersData,markers_new)
+            console.log(markersData, markers_new);
             if (markersData.length > 0) {
               that.setData({
                 markers: markers_new,
