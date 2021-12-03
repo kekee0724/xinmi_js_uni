@@ -1,0 +1,338 @@
+/* pages/index/index.wxss */
+.content {
+  background-color: #333333;
+  height: 200rpx;
+  width: 200rpx;
+  font-size: 28rpx;
+}
+
+.list {
+  display: flex;
+}
+
+.list .list-item {
+  flex: 1;
+  height: 128rpx;
+  border-radius: 20rpx;
+  background-color: #f5f5f5;
+  margin-right: 20rpx;
+  padding: 20rpx;
+  font-size: 28rpx;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.list .list-item text {
+  font-size: 24rpx;
+  font-weight: bold;
+}
+
+.list .list-item::after {
+  position: absolute;
+  content: "\e9e4";
+  font-family: "ieb" !important;
+  font-size: 78rpx;
+  font-style: normal;
+  right: 0rpx;
+  bottom: -28rpx;
+  opacity: 0.15;
+}
+
+.list .list-item .images-box {
+  width: 140rpx;
+  height: 40rpx;
+  position: absolute;
+  padding-top: 4rpx;
+  background: linear-gradient(to bottom right, #a719ff, #d399f7);
+  left: 0;
+  bottom: 0;
+  border-radius: 0 20rpx 0 20rpx;
+  box-sizing: border-box;
+}
+
+.list .list-item .images-box::after {
+  content: "VR";
+  font-weight: bold;
+  color: #fff;
+  position: absolute;
+  right: 10rpx;
+  top: 0rpx;
+}
+
+.list .list-item .images-box image {
+  width: 60%;
+  height: 80%;
+}
+
+.list .list-item:nth-child(1) {
+  background-color: rgba(167, 25, 255, 0.1);
+  color: rgba(167, 25, 255, 1);
+}
+
+.list .list-item:nth-child(2) {
+  background-color: rgba(51, 153, 255, 0.1);
+  color: rgba(51, 153, 255, 1);
+}
+
+.list .list-item:nth-child(3) {
+  background-color: rgba(0, 204, 0, 0.1);
+  color: rgba(0, 204, 0, 1);
+  margin-right: 0;
+}
+
+.map-search {
+  position: absolute;
+  top: 20rpx;
+  left: 20rpx;
+  right: 20rpx;
+  background-color: #fff;
+  padding: 15rpx 30rpx;
+  border-radius: 8rpx;
+  z-index: 9;
+}
+
+.map-search text {
+  font-weight: 500;
+  margin-right: 20rpx;
+}
+
+.map-search .search-box {
+  position: relative;
+  background-color: #f5f5f5;
+  border-radius: 8rpx;
+  padding: 0 20rpx 0 80rpx;
+}
+
+.map-search .search-box .search-icon {
+  position: absolute;
+  font-size: 50rpx;
+  color: #666666;
+  left: 20rpx;
+}
+
+.radius-body {
+  border-radius: 30rpx 30rpx 0 0;
+  background-color: #fff;
+  padding: 30rpx;
+}
+
+.list-card .card {
+  position: relative;
+  margin-bottom: 20rpx;
+  padding: 20rpx 30rpx;
+  border-radius: 16rpx;
+}
+
+.list-card .card .title {
+  text-align: left;
+  font-weight: bold;
+}
+
+.list-card .card:last-child {
+  margin-bottom: 0;
+}
+
+.list-card .card.dark {
+  background-color: #f5f5f5;
+}
+
+.list-card .card .body .text-list .li {
+  font-size: 14px;
+  text-align: left;
+  padding: 5rpx 0 5rpx 70rpx;
+  position: relative;
+}
+
+.list-card .card .body .text-list .li::after {
+  content: "·";
+  position: absolute;
+  font-size: 72rpx;
+  left: 36rpx;
+  top: -14rpx;
+  line-height: 1;
+}
+
+.tabset {
+  margin: 30rpx 0 30rpx 0;
+}
+
+.select-tag {
+  margin: 0 -10rpx;
+}
+
+.select-tag text {
+  display: inline-block;
+  width: calc(33.33333% - 20rpx);
+  text-align: center;
+  margin: 10rpx;
+  background-color: #3399ff27;
+  font-size: 24rpx;
+  color: #3399FF;
+  padding: 4rpx 20rpx 4rpx 20rpx;
+  box-sizing: border-box;
+  border-radius: 8rpx;
+}
+
+.select-tag text.active {
+  background-color: #3399FF;
+  color: #fff;
+}
+
+ec-canvas {
+  width: 100%;
+  height: 600rpx;
+}
+
+.canvas {
+  height: 500rpx !important;
+}
+
+.radio-btn {
+  padding: 30rpx 0;
+}
+
+.radio-btn .item {
+  background-color: rgba(51, 153, 255, 0.2);
+  text-align: center;
+  border-radius: 16rpx;
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.radio-btn .flex-item {
+  margin-right: 40rpx;
+}
+
+.card-list-item {
+  padding: 40rpx 0;
+}
+
+.card-list-item .header {
+  margin-bottom: 20rpx;
+}
+
+.map-box {
+  position: relative;
+}
+
+.tabs-button text {
+  display: inline-block;
+  height: 60rpx;
+  border: #3399FF solid 1rpx;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 24rpx;
+  color: #3399FF;
+  text-align: center;
+  line-height: 60rpx;
+  border-radius: 6rpx;
+  box-sizing: border-box;
+  margin-right: 12rpx;
+  padding: 0 16rpx;
+}
+
+.tabs-button text:last-child {
+  margin-right: 0;
+}
+
+.tabs-button text.active {
+  background-color: #3399FF;
+  color: #fff;
+}
+
+.down-box {
+  font-size: 28rpx;
+}
+
+.down-box .flex-item {
+  margin-right: 16rpx
+}
+
+.down-box .flex-item:last-child {
+  margin-right: 0;
+}
+
+.pick-box {
+  background-color: #f5f5f5;
+  padding: 6rpx 12rpx;
+}
+
+.vr-tag {
+  position: relative;
+}
+
+.vr-tag .item {
+  z-index: 99;
+  position: absolute;
+  width: 170rpx;
+  height: 52rpx;
+  background: #794edf;
+  right: 0;
+  top: 0;
+  font-size: 26rpx;
+  font-weight: bold;
+  border-radius: 0 0 0 20rpx;
+  color: #fff;
+  box-sizing: border-box;
+  padding: 3rpx 0 3rpx 3rpx;
+}
+
+.vr-tag .item image {
+  width: 60%;
+  height: 80%;
+  float: left;
+  margin-top: 4rpx;
+}
+
+.vr-tag .item text {
+  vertical-align: middle;
+  margin-left: 10rpx;
+}
+
+.weui-uploader__img {
+  display: block;
+  width: 246rpx;
+  height: 168rpx
+}
+
+.tabs-button {
+  line-height: 70rpx;
+}
+
+/* search */
+.page-body {
+  background-color: #ffffff;
+}
+
+.select-list .select-item {
+  padding: 40rpx 30rpx;
+}
+
+.select-list .select-item .title {
+  font-size: 36rpx;
+  font-weight: bold;
+}
+
+.select-list .select-item .body {
+  margin: 20rpx -6rpx 0;
+}
+
+.select-list .select-item .body .tag {
+  display: inline-block;
+  height: 86rpx;
+  background-color: rgba(249, 249, 249, 1);
+  color: rgba(0, 0, 0, 0.5);
+  width: calc(33.3333333% - 12rpx);
+  margin: 6rpx;
+  text-align: center;
+  line-height: 86rpx;
+  border-radius: 12rpx;
+  font-size: 10px;
+}
+
+.select-list .select-item .body .tag.active {
+  background-color: #3399FF;
+  color: #ffffff;
+}
