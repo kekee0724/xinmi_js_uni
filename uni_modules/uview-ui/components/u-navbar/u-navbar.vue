@@ -41,8 +41,8 @@
 				<text
 					class="u-line-1 u-navbar__content__title"
 					:style="{
-						width: $u.addUnit(titleWidth)
-					}"
+					width: $u.addUnit(titleWidth)
+				}"
 				>{{ title }}</text>
 				<view
 					class="u-navbar__content__right"
@@ -109,7 +109,7 @@
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 	@import "../../libs/css/components.scss";
 
 	.u-navbar {

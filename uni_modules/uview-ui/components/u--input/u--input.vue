@@ -24,6 +24,7 @@
 		:selectionEnd="selectionEnd"
 		:adjustPosition="adjustPosition"
 		:inputAlign="inputAlign"
+		:autosize="autosize"
 		:fontSize="fontSize"
 		:color="color"
 		:prefixIcon="prefixIcon"
@@ -40,13 +41,9 @@
 		@keyboardheightchange="$emit('keyboardheightchange')"
 		@change="e => $emit('change', e)"
 		@input="e => $emit('input', e)"
-		@confirm="e => $emit('confirm', e)"
 		@clear="$emit('clear')"
 		@click="$emit('click')"
-	>
-		<slot name="prefix" slot="prefix"></slot>
-		<slot name="suffix" slot="suffix"></slot>
-	</uvInput>
+	></uvInput>
 </template>
 
 <script>

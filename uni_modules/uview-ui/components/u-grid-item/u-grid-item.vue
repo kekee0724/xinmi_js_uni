@@ -148,7 +148,7 @@
 	};
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 	@import "../../libs/css/components.scss";
       $u-grid-item-hover-class-opcatiy:.5 !default; 
       $u-grid-item-margin-top:1rpx !default; 

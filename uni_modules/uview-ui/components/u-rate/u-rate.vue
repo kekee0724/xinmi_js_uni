@@ -118,7 +118,6 @@
 			value(val) {
 				this.activeIndex = val;
 			},
-			activeIndex: 'emitEvent'
 		},
 		methods: {
 			init() {
@@ -246,6 +245,7 @@
 				setTimeout(() => {
 					this.moving = false;
 				}, 10);
+				this.emitEvent();
 			},
 		},
 		mounted() {
@@ -254,7 +254,7 @@
 	};
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "../../libs/css/components.scss";
 $u-rate-margin: 0 !default;
 $u-rate-padding: 0 !default;

@@ -181,7 +181,7 @@
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 	@import "../../libs/css/components.scss";
 
 	@mixin background {

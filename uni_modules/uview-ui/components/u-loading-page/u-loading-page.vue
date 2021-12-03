@@ -69,7 +69,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "../../libs/css/components.scss";
 
 $text-color: rgb(200, 200, 200) !default;

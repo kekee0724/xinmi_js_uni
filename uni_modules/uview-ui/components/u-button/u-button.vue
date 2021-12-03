@@ -285,7 +285,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "../../libs/css/components.scss";
 
 /* #ifndef APP-NVUE */

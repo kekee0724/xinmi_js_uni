@@ -165,7 +165,7 @@
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 	@import "../../libs/css/components.scss";
 
 	$u-notify-padding: 8px 10px !default;

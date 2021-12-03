@@ -186,7 +186,7 @@
 	};
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 	@import '../../libs/css/components.scss';
 
 	$u-image-error-top:0px !default;

@@ -36,7 +36,7 @@
 						<text
 							class="u-form-item__body__left__content__label"
 							:style="[parentData.labelStyle, {
-								justifyContent: parentData.labelAlign === 'left' ? 'flex-start' : parentData.labelAlign === 'center' ? 'center' : 'flex-end'
+								justifyContent: parentData.labelAlign === 'left' ? 'flex-start' : elLabelAlign === 'center' ? 'center' : 'flex-end'
 							}]"
 						>{{ label }}</text>
 					</view>
@@ -58,7 +58,7 @@
 		</view>
 		<slot name="error">
 			<text
-				v-if="!!message && parentData.errorType === 'message'"
+				v-if="!!message"
 				class="u-form-item__body__right__message"
 				:style="{
 					marginLeft: $u.addUnit(labelWidth || parentData.labelWidth)
@@ -67,7 +67,6 @@
 		</slot>
 		<u-line
 			v-if="borderBottom"
-			:color="message && parentData.errorType === 'border-bottom' ? $u.color.error : $u.props.line.color"
 			:customStyle="`margin-top: ${message ? '5px' : 0}`"
 		></u-line>
 	</view>
@@ -104,9 +103,7 @@
 					// 提示文本的样式
 					labelStyle: {},
 					// 提示文本的宽度
-					labelWidth: 45,
-					// 错误提示方式
-					errorType: 'message'
+					labelWidth: 45
 				}
 			}
 		},
@@ -148,7 +145,7 @@
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 	@import "../../libs/css/components.scss";
 
 	.u-form-item {

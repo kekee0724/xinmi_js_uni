@@ -32,7 +32,7 @@
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 	@import "../../libs/css/components.scss";
 	
 	$u-cell-group-title-padding: 16px 16px 8px !default;

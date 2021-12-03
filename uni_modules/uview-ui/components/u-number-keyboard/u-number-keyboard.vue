@@ -130,7 +130,7 @@
 	};
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 	@import "../../libs/css/components.scss";
 	$u-number-keyboard-background-color:rgb(224, 228, 230) !default;
 	$u-number-keyboard-padding:8px 10rpx 8px 10rpx !default;

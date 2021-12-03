@@ -21,12 +21,12 @@
 		:border="border"
 		:customStyle="customStyle"
 		:formatter="formatter"
-		@focus="e => $emit('focus')"
-		@blur="e => $emit('blur')"
-		@linechange="e => $emit('linechange', e)"
-		@confirm="e => $emit('confirm')"
+		@focus="$emit('focus')"
+		@blur="$emit('blur')"
+		@linechange="$emit('linechange')"
+		@confirm="$emit('confirm')"
 		@input="e => $emit('input', e)"
-		@keyboardheightchange="e => $emit('keyboardheightchange')"
+		@keyboardheightchange="$emit('keyboardheightchange')"
 	></uvTextarea>
 </template>
 

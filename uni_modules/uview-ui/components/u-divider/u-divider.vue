@@ -88,7 +88,7 @@
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 	@import '../../libs/css/components.scss';
 	$u-divider-margin:15px 0 !default;
 	$u-divider-text-margin:0 15px !default;

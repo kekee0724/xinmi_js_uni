@@ -338,7 +338,7 @@
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 	@import '../../libs/css/components.scss';
 
 	$u-numberBox-hover-bgColor: #E6E6E6 !default;

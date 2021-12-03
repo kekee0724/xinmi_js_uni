@@ -147,7 +147,7 @@
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 	@import "../../libs/css/components.scss";
 	$u-count-down-text-color:$u-content-color !default;
 	$u-count-down-text-font-size:15px !default;

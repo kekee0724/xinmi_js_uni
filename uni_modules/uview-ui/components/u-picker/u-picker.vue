@@ -8,8 +8,6 @@
 				v-if="showToolbar"
 				:cancelColor="cancelColor"
 				:confirmColor="confirmColor"
-				:cancelText="cancelText"
-				:confirmText="confirmText"
 				:title="title"
 				@cancel="cancel"
 				@confirm="confirm"
@@ -30,7 +28,7 @@
 				>
 					<text
 						v-if="$u.test.array(item)"
-						class="u-picker__view__column__item u-line-1"
+						class="u-picker__view__column__item"
 						v-for="(item1, index1) in item"
 						:key="index1"
 						:style="{
@@ -232,7 +230,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 	@import "../../libs/css/components.scss";
 
 	.u-picker {
@@ -241,9 +239,9 @@ export default {
 		&__view {
 
 			&__column {
-				@include flex;
 				flex: 1;
 				justify-content: center;
+				@include flex;
 
 				&__item {
 					@include flex;
@@ -251,9 +249,6 @@ export default {
 					align-items: center;
 					font-size: 16px;
 					text-align: center;
-					/* #ifndef APP-NVUE */
-					display: block;
-					/* #endif */
 
 					&--disabled {
 						/* #ifndef APP-NVUE */

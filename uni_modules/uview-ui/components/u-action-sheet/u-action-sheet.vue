@@ -186,7 +186,7 @@
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 	@import "../../libs/css/components.scss";
 	$u-action-sheet-reset-button-width:100% !default;
 	$u-action-sheet-title-font-size: 16px !default;

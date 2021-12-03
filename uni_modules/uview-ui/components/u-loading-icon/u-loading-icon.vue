@@ -186,7 +186,7 @@
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 	@import "../../libs/css/components.scss";
 	$u-loading-icon-color: #c8c9cc !default;
 	$u-loading-icon-text-margin-left:4px !default;

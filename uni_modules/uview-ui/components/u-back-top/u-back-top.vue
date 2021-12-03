@@ -6,7 +6,7 @@
 	>
 		<view
 		    class="u-back-top"
-			:style="[contentStyle]"
+			:style="contentStyle"
 		    v-if="!$slots.default && !$slots.$default"
 			@click="backToTop"
 		>
@@ -114,7 +114,7 @@
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 	@import '../../libs/css/components.scss';
      $u-back-top-flex:1 !default;
      $u-back-top-height:100% !default;

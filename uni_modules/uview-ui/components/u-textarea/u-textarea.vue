@@ -20,7 +20,7 @@
             :disableDefaultPadding="disableDefaultPadding"
             :holdKeyboard="holdKeyboard"
             :maxlength="maxlength"
-            :confirmType="confirmType"
+            confirmType="confirmType"
             @focus="onFocus"
             @blur="onBlur"
             @linechange="onLinechange"
@@ -194,7 +194,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "../../libs/css/components.scss";
 
 .u-textarea {
@@ -221,7 +221,6 @@ export default {
         flex: 1;
         font-size: 15px;
         color: $u-content-color;
-		width: 100%;
     }
 
     &__count {

@@ -15,8 +15,6 @@ $u-button-plain-u-button-error-color:$u-error;
 $u-button-plain-u-button-warning-color:$u-error;
 
 .u-button {
-	width: 100%;
-	
 	&:before {
 		position: absolute;
 		top:$u-button-before-top;

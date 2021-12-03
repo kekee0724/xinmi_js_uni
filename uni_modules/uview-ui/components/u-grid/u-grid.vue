@@ -78,7 +78,7 @@
 	};
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 	@import "../../libs/css/components.scss";
      $u-grid-width:100% !default;
 	.u-grid {

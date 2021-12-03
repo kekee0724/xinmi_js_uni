@@ -13,35 +13,34 @@
                     ></u-icon>
                 </slot>
             </view>
-            <view class="u-input__content__field-wrapper" @tap="clickHandler">
-            	<input
-            	    class="u-input__content__field-wrapper__field"
-            	    :style="[inputStyle]"
-            	    :type="type"
-            	    :focus="focus"
-            	    :cursor="cursor"
-            	    :value="innerValue"
-            	    :auto-blur="autoBlur"
-            	    :disabled="disabled"
-            	    :maxlength="maxlength"
-            	    :placeholder="placeholder"
-            	    :placeholder-style="placeholderStyle"
-            	    :placeholder-class="placeholderClass"
-            	    :confirm-type="confirmType"
-            	    :confirm-hold="confirmHold"
-            	    :hold-keyboard="holdKeyboard"
-            	    :cursor-spacing="cursorSpacing"
-            	    :adjust-position="adjustPosition"
-            	    :selection-end="selectionEnd"
-            	    :selection-start="selectionStart"
-            	    :password="password || type === 'password'"
-            	    @input="onInput"
-            	    @blur="onBlur"
-            	    @focus="onFocus"
-            	    @confirm="onConfirm"
-            	    @keyboardheightchange="onkeyboardheightchange"
-            	/>
-            </view>
+            <input
+                class="u-input__content__field"
+                :style="[inputStyle]"
+                :type="type"
+                :focus="focus"
+                :cursor="cursor"
+                :value="innerValue"
+                :auto-blur="autoBlur"
+                :disabled="disabled"
+                :maxlength="maxlength"
+                :placeholder="placeholder"
+                :placeholder-style="placeholderStyle"
+                :placeholder-class="placeholderClass"
+                :confirm-type="confirmType"
+                :confirm-hold="confirmHold"
+                :hold-keyboard="holdKeyboard"
+                :cursor-spacing="cursorSpacing"
+                :adjust-position="adjustPosition"
+                :selection-end="selectionEnd"
+                :selection-start="selectionStart"
+                :password="password || type === 'password'"
+                @input="onInput"
+                @blur="onBlur"
+                @focus="onFocus"
+                @confirm="onConfirm"
+                @keyboardheightchange="onKeyboardHeightChange"
+                @tap="clickHandler"
+            />
             <view
                 class="u-input__content__clear"
                 v-if="isShowClear"
@@ -100,6 +99,7 @@ import props from "./props.js";
  * @property {String ｜ Number}	selectionEnd			光标结束位置，自动聚集时有效，需与selection-start搭配使用 （ 默认 -1 ）
  * @property {Boolean}			adjustPosition			键盘弹起时，是否自动上推页面 （ 默认 true ）
  * @property {String}			inputAlign				输入框内容对齐方式（ 默认 'left' ）
+ * @property {Boolean}			autosize				是否自适应内容高度，只对type=textarea有效，可传入对象,如{ maxHeight: 100, minHeight: 50 } （ 默认 false ）
  * @property {String | Number}	fontSize				输入框字体的大小 （ 默认 '15px' ）
  * @property {String}			color					输入框字体颜色	（ 默认 '#303133' ）
  * @property {Function}			formatter			    内容式化函数
@@ -195,7 +195,6 @@ export default {
             const style = {
                 color: this.color,
                 fontSize: uni.$u.addUnit(this.fontSize),
-				textAlign: this.inputAlign
             };
             return style;
         },
@@ -206,8 +205,8 @@ export default {
 			this.innerFormatter = e
 		},
         // 当键盘输入时，触发input事件
-        onInput(e) {
-            let { value = "" } = e.detail || {};
+        onInput(event) {
+            let { value = "" } = event.detail || {};
             // 格式化过滤方法
             const formatter = this.formatter || this.innerFormatter
             const formatValue = formatter(value)
@@ -236,11 +235,11 @@ export default {
         },
         // 点击完成按钮时触发
         onConfirm(event) {
-            this.$emit("confirm", this.innerValue);
+            this.$emit("confirm");
         },
         // 键盘高度发生变化的时候触发此事件
         // 兼容性：微信小程序2.7.0+、App 3.1.0+
-		onkeyboardheightchange() {
+        onKeyboardHeightChange() {
             this.$emit("keyboardheightchange");
         },
         // 内容发生变化，进行处理
@@ -282,7 +281,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "../../libs/css/components.scss";
 
 .u-input {
@@ -310,20 +309,16 @@ export default {
         align-items: center;
         justify-content: space-between;
 
-        &__field-wrapper {
+        &__field {
             position: relative;
-            @include flex(row);
+            @include flex;
             margin: 0;
+            line-height: 26px;
+            text-align: left;
+            color: $u-main-color;
+            height: 24px;
+            font-size: 15px;
             flex: 1;
-			
-			&__field {
-				line-height: 26px;
-				text-align: left;
-				color: $u-main-color;
-				height: 24px;
-				font-size: 15px;
-				flex: 1;
-			}
         }
 
         &__clear {

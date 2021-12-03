@@ -47,7 +47,7 @@
 	};
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 	.u-safe-bottom {
 		/* #ifndef APP-NVUE */
 		width: 100%;

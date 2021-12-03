@@ -20,6 +20,7 @@
 				class="u-popup__content"
 				:style="[contentStyle]"
 				@tap.stop="noop"
+				:class="[round && `u-popup__content--round-${mode}`]"
 			>
 				<u-status-bar v-if="safeAreaInsetTop"></u-status-bar>
 				<slot></slot>
@@ -55,6 +56,7 @@
 	 * @property {Boolean}			overlay				是否显示遮罩 （默认 true ）
 	 * @property {String}			mode				弹出方向（默认 'bottom' ）
 	 * @property {String | Number}	duration			动画时长，单位ms （默认 300 ）
+	 * @property {String | Number}	borderRadius		弹窗圆角值（默认 0 ）
 	 * @property {Boolean}			closeable			是否显示关闭图标（默认 false ）
 	 * @property {Object | String}	overlayStyle		自定义遮罩的样式
 	 * @property {String | Number}	overlayOpacity		遮罩透明度，0-1之间（默认 0.5）
@@ -63,7 +65,7 @@
 	 * @property {Boolean}			safeAreaInsetBottom	是否为iPhoneX留出底部安全距离 （默认 true ）
 	 * @property {Boolean}			safeAreaInsetTop	是否留出顶部安全距离（状态栏高度） （默认 false ）
 	 * @property {String}			closeIconPos		自定义关闭图标位置（默认 'top-right' ）
-	 * @property {String | Number}	round				圆角值（默认 0）
+	 * @property {Boolean}			round				是否显示圆角（默认 false ）
 	 * @property {Boolean}			zoom				当mode=center时 是否开启缩放（默认 true ）
 	 * @property {Object}			customStyle			组件的样式，对象形式
 	 * @event {Function} open 弹出层打开
@@ -139,18 +141,26 @@
 				if (this.bgColor) {
 					style.backgroundColor = this.bgColor
 				}
-				if(this.round) {
-					const value = uni.$u.addUnit(this.round)
-					if(this.mode === 'top') {
-						style.borderBottomLeftRadius = value
-						style.borderBottomRightRadius = value
-					} else if(this.mode === 'bottom') {
-						style.borderTopLeftRadius = value
-						style.borderTopRightRadius = value
-					} else if(this.mode === 'center') {
-						style.borderRadius = value
-					} 
-				}
+				// // 如果用户设置了borderRadius值，添加弹窗的圆角
+				// if (this.round && this.mode === 'bottom' || this.mode === 'center') {
+				// 	switch (this.mode) {
+				// 		case 'left':
+				// 			style.borderRadius = `0 15px 15px 0`;
+				// 			break;
+				// 		case 'top':
+				// 			style.borderRadius = `0 0 15px 15px`;
+				// 			break;
+				// 		case 'right':
+				// 			style.borderRadius = `15px 0 0 15px`;
+				// 			break;
+				// 		case 'bottom':
+				// 			style.borderRadius = `15px 15px 0 0`;
+				// 			break;
+				// 		default:
+				// 	}
+				// 	// 不加可能圆角无效
+				// 	style.overflow = 'hidden';
+				// }
 				return uni.$u.deepMerge(style, uni.$u.addStyle(this.customStyle))
 			},
 			position() {
@@ -185,10 +195,6 @@
 				this.$emit('open')
 			},
 			clickHandler() {
-				// 由于中部弹出时，其u-transition占据了整个页面相当于遮罩，此时需要发出遮罩点击事件，是否无法通过点击遮罩关闭弹窗
-				if(this.mode === 'center') {
-					this.overlayClick()
-				}
 				this.$emit('click')
 			},
 			// #ifdef MP-WEIXIN
@@ -222,7 +228,7 @@
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 	@import "../../libs/css/components.scss";
 	$u-popup-flex:1 !default;
 	$u-popup-content-background-color: #fff !default;

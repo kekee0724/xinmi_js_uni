@@ -24,8 +24,6 @@ export default {
         itemStyle: () => ({
             height: '44px'
         }),
-        scrollable: true,
-		current: 0,
-		keyName: 'name'
+        scrollable: true
     }
 }

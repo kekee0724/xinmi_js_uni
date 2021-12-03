@@ -31,7 +31,7 @@
 								:class="['ellipsis' && 'u-line-1', item.disabled && 'u-tabs__wrapper__nav__item__text--disabled']"
 								class="u-tabs__wrapper__nav__item__text"
 								:style="[textStyle(index)]"
-							>{{ item[keyName] }}</text>
+							>{{ item.name }}</text>
 							<u-badge
 								:show="!!(item.badge && (item.badge.show || item.badge.isDot || item.badge.value))"
 								:isDot="item.badge && item.badge.isDot || $u.props.badge.isDot"
@@ -52,9 +52,9 @@
 							class="u-tabs__wrapper__nav__line"
 							ref="u-tabs__wrapper__nav__line"
 							:style="[{
-									width: $u.addUnit(lineWidth),
-									height: $u.addUnit(lineHeight),
-									backgroundColor: lineColor
+									width: $u.addUnit(this.lineWidth),
+									height: $u.addUnit(this.lineHeight),
+									backgroundColor: this.lineColor
 								}]"
 						>
 							<!-- #endif -->
@@ -63,11 +63,11 @@
 								class="u-tabs__wrapper__nav__line"
 								ref="u-tabs__wrapper__nav__line"
 								:style="[{
-										width: $u.addUnit(lineWidth),
+										width: $u.addUnit(this.lineWidth),
 										transform: `translate(${lineOffsetLeft}px)`,
 										transitionDuration: `${firstTime ? 0 : duration}ms`,
-										height: $u.addUnit(lineHeight),
-										backgroundColor: lineColor
+										height: $u.addUnit(this.lineHeight),
+										backgroundColor: this.lineColor
 									}]"
 							>
 								<!-- #endif -->
@@ -92,8 +92,7 @@
 	 * @tutorial https://www.uviewui.com/components/tabs.html
 	 * @property {String | Number}	duration			滑块移动一次所需的时间，单位秒（默认 200 ）
 	 * @property {String | Number}	swierWidth			swiper的宽度（默认 '750rpx' ）
-	 * @event {Function(index)} change 标签改变时触发 index: 点击了第几个tab，索引从0开始
-	 * @event {Function(index)} click 点击标签时触发 index: 点击了第几个tab，索引从0开始
+	 * @event {Function(index)} change 点击标签时触发 index: 点击了第几个tab，索引从0开始
 	 * @example <u-tabs :list="list" :is-scroll="false" :current="current" @change="change"></u-tabs>
 	 */
 	export default {
@@ -108,22 +107,13 @@
 				tabsRect: {
 					left: 0
 				},
-				innerCurrent: 0,
+				current: 0,
 				moving: false,
 			}
 		},
 		watch: {
-			current: {
-				immediate: true,
-				handler (newValue, oldValue) {
-					// 内外部值不相等时，才尝试移动滑块
-					if (newValue !== this.innerCurrent) {
-						this.innerCurrent = newValue
-						this.$nextTick(() => {
-							this.resize()
-						})
-					}
-				}
+			current(newValue, oldValue) {
+				// this.setLineLeft(newValue)
 			}
 		},
 		computed: {
@@ -131,9 +121,8 @@
 				return index => {
 					const style = {}
 					// 取当期是否激活的样式
-					const customeStyle = index === this.innerCurrent ? uni.$u.addStyle(this.activeStyle) : uni.$u
-						.addStyle(
-							this.inactiveStyle)
+					const customeStyle = index === this.current ? uni.$u.addStyle(this.activeStyle) : uni.$u.addStyle(
+						this.inactiveStyle)
 					// 如果当前菜单被禁用，则加上对应颜色，需要在此做处理，是因为nvue下，无法在style样式中通过!import覆盖标签的内联样式
 					if (this.list[index].disabled) {
 						style.color = '#c8c9cc'
@@ -147,15 +136,16 @@
 		},
 		methods: {
 			setLineLeft() {
-				const tabItem = this.list[this.innerCurrent];
+				const tabItem = this.list[this.current];
 				if (!tabItem) {
 					return;
 				}
 				// 获取滑块该移动的位置
 				let lineOffsetLeft = this.list
-					.slice(0, this.innerCurrent)
+					.slice(0, this.current)
 					.reduce((total, curr) => total + curr.rect.width, 0);
 				this.lineOffsetLeft = lineOffsetLeft + (tabItem.rect.width - this.lineWidth) / 2
+
 				// #ifdef APP-NVUE
 				// 第一次移动滑块，无需过渡时间
 				this.animation(this.lineOffsetLeft, this.firstTime ? 0 : parseInt(this.duration))
@@ -183,19 +173,11 @@
 			},
 			// 点击某一个标签
 			clickHandler(item, index) {
-				// 因为标签可能为disabled状态，所以click是一定会发出的，但是change事件是需要可用的状态才发出
-				this.$emit('click', {
-					...item,
-					index
-				})
 				// 如果disabled状态，返回
 				if (item.disabled) return
-				this.innerCurrent = index
+				this.current = index
 				this.resize()
-				this.$emit('change', {
-					...item,
-					index
-				})
+				this.$emit('click', {...item, index})
 			},
 			init() {
 				uni.$u.sleep().then(() => {
@@ -204,10 +186,10 @@
 			},
 			setScrollLeft() {
 				// 当前活动tab的布局信息，有tab菜单的width和left(为元素左边界到父元素左边界的距离)等信息
-				const tabRect = this.list[this.innerCurrent]
+				const tabRect = this.list[this.current]
 				// 累加得到当前item到左边的距离
 				const offsetLeft = this.list
-					.slice(0, this.innerCurrent)
+					.slice(0, this.current)
 					.reduce((total, curr) => {
 						return total + curr.rect.width
 					}, 0)
@@ -276,10 +258,7 @@
 	}
 </script>
 
-<style
-	lang="scss"
-	scoped
->
+<style lang="scss">
 	@import "../../libs/css/components.scss";
 
 	.u-tabs {
