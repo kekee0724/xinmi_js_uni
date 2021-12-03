@@ -25,7 +25,7 @@
         <view class="weui-uploader__file">
           <image
             class="weui-uploader__img"
-            :src="'../../static/components/picture/error.png'"
+            :src="'../../static/images/error.png'"
             mode="aspectFill"
           />
           <text
