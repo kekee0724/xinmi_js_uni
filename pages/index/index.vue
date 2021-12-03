@@ -225,7 +225,7 @@ const {
 let windowW = 0;
 // let windowH = 0;
 
-let wxCharts = require("../../js/wxcharts-min");
+let wxCharts = require("../../static/js/wxcharts-min");
 
 export default {
   data() {
