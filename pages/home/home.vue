@@ -153,7 +153,7 @@
           </view>
 
           <!-- 微头条 -->
-          <!-- <home-article class="hot-article"></home-article> -->
+          <home-article class="hot-article"></home-article>
 
           <!-- 热门活动 -->
           <!-- <hot-activity class="hot-activity" /> -->
@@ -178,7 +178,7 @@ import loading from "@/components/loading/loading";
 
 import serviceList from "./service-list/service-list";
 // import hotActivity from "../hot-activity/hot-activity";
-// import homeArticle from "../home-article/home-article";
+import homeArticle from "./home-article/home-article";
 import indexNotice from "./index-notice/index-notice";
 
 import { AUTH, TOOLS, WXAPI } from "../../kek";
@@ -195,7 +195,7 @@ export default {
     loading,
     serviceList,
     // hotActivity,
-    // homeArticle,
+    homeArticle,
     indexNotice,
   },
   data() {
@@ -497,19 +497,19 @@ nav-bar {
   width: 100%;
   height: 100%;
 }
-.index-card > .title {
+.index-card /deep/ .title {
   background-color: #ffffff;
   color: #000;
   font-size: 16px;
   padding: 30rpx 30rpx 18rpx 30rpx;
 }
-.morelink {
+.index-card /deep/ .morelink {
   display: inline-block;
   font-size: 12px;
   color: #02b8cd;
   margin-right: 5px;
 }
-.morelink::after {
+.index-card /deep/ .morelink::after {
   content: " ";
   position: relative;
   top: -1px;
