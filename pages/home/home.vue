@@ -521,20 +521,20 @@ nav-bar {
   border-style: solid;
   transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
 }
-.headline-box {
+.index-card /deep/ .headline-box {
   padding: 0 15rpx;
 }
-.index-headline {
+.index-card /deep/ .index-headline {
   white-space: nowrap;
 }
-.index-headline .item {
+.index-card /deep/ .index-headline .item {
   width: 50%;
   padding: 15rpx;
   display: inline-block;
   box-sizing: border-box;
   vertical-align: text-top;
 }
-.index-headline .item .label-name {
+.index-card /deep/ .index-headline .item .label-name {
   font-size: 26rpx;
   color: #000;
   line-height: 1.5;
@@ -546,14 +546,14 @@ nav-bar {
   -webkit-line-clamp: 2;
   margin-top: 10rpx;
 }
-.index-headline .item .img {
+.index-card /deep/ .index-headline .item .img {
   width: 100%;
   height: 190rpx;
   border-radius: 12rpx;
   overflow: hidden;
   text-align: center;
 }
-.index-headline .item .img /deep/ uni-image {
+.index-card /deep/ .index-headline .item .img /deep/ uni-image {
   width: 100%;
   height: 100%;
 }
