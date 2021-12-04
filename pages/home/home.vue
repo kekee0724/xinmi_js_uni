@@ -55,8 +55,6 @@
         <view class="bottom" @tap="closeThis">记住了 我去试试</view>
       </view>
 
-      <!-- <van-notify id="van-notify" :top="180" /> -->
-
       <loading :hideLoading="loadingHidden" />
       <nav-bar :show-nav="false" :nav-style="topStyle">
         <!-- 园区选择 -->
@@ -154,6 +152,9 @@
             <view></view>
           </view>
 
+          <!-- 微头条 -->
+          <!-- <home-article class="hot-article"></home-article> -->
+
           <!-- 热门活动 -->
           <!-- <hot-activity class="hot-activity" /> -->
 
@@ -174,64 +175,17 @@ import imageAuto from "@/components/image-auto/image-auto";
 import navBar from "@/components/nav-bar/nav-bar";
 import susPanel from "@/components/suspension/suspension";
 import loading from "@/components/loading/loading";
-// import list from "@/components/tree_list/index";
+
 // import serviceList from "../service-list/service-list";
 // import hotActivity from "../hot-activity/hot-activity";
 // import homeArticle from "../home-article/home-article";
 // import indexNotice from "../index-notice/index-notice";
-// import homeWhite from "../home-white/home-white";
 
-var __awaiter =
-  (this && this.__awaiter) ||
-  function (thisArg, _arguments, P, generator) {
-    function adopt(value) {
-      return value instanceof P
-        ? value
-        : new P(function (resolve) {
-            resolve(value);
-          });
-    }
-
-    return new (P || (P = Promise))(function (resolve, reject) {
-      function fulfilled(value) {
-        try {
-          step(generator.next(value));
-        } catch (e) {
-          reject(e);
-        }
-      }
-
-      function rejected(value) {
-        try {
-          step(generator["throw"](value));
-        } catch (e) {
-          reject(e);
-        }
-      }
-
-      function step(result) {
-        if (result.done) {
-          resolve(result.value);
-        } else {
-          adopt(result.value).then(fulfilled, rejected);
-        }
-      }
-
-      step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-  };
-
-Object.defineProperty(exports, "__esModule", {
-  value: true,
-});
-const app = getApp();
-
-const { AUTH, TOOLS, WXAPI } = require("../../kek");
+import { AUTH, TOOLS, WXAPI } from "../../kek";
 
 import { Notify } from "vant";
-// const {index_1} = require("../../core/index");
+
 import { setLocalStorage, getLocalStorage } from "../../core/funcs/storage";
-// const task = require("../../../utils/request");
 
 export default {
   components: {
@@ -239,12 +193,10 @@ export default {
     navBar,
     susPanel,
     loading,
-    // list,
     // serviceList,
     // hotActivity,
     // homeArticle,
     // indexNotice,
-    // homeWhite,
   },
   data() {
     return {
@@ -286,9 +238,6 @@ export default {
       });
     }
 
-    // this.setData({
-    //   isAuth: isAuth(),
-    // });
     uni.getLocation({
       type: "wgs84",
       success: (res) => {
@@ -305,18 +254,6 @@ export default {
     uni.showShareMenu({
       withShareTicket: true,
     });
-
-    if (e && e.inviter_id) {
-      uni.setStorageSync("referrer", e.inviter_id);
-    }
-
-    if (e && e.scene) {
-      const scene = decodeURIComponent(e.scene);
-
-      if (scene) {
-        uni.setStorageSync("referrer", scene.substring(11));
-      }
-    }
 
     AUTH.authorize().then((_res) => {
       AUTH.bindSeller();
@@ -340,112 +277,91 @@ export default {
       const child1 = this.$mp.page.selectComponent(".hot-activity");
       const child2 = this.$mp.page.selectComponent(".notice");
       const child3 = this.$mp.page.selectComponent(".service-list");
-      //   const child4 = this.$mp.page.selectComponent(".home-white");
+
       console.log("child2", child2);
       child1 && child1.fetchNews();
       child2 && child2.getNotice();
       child3 && child3.getUserProfile();
-
-      //   if (isAuth()) {
-      //     child2 && child2.getNotice();
-      //   }
-
-      //   if (isAuth()) {
-      //     child4 && child4.getInitData();
-      //   }
     },
 
-    initBanners() {
-      return __awaiter(this, void 0, void 0, function* () {
-        const data = {};
-        const res = yield WXAPI.banners({
-          type: "index",
-        });
-
-        if (res.code == 700) {
-          uni.showModal({
-            title: "提示",
-            content: "请在后台添加 banner 轮播图片，自定义类型填写 index",
-            showCancel: false,
-          });
-        } else {
-          data.banners = res.data;
-        }
-
-        this.setData(data);
+    async initBanners() {
+      const data = {};
+      // 读取头部轮播图
+      const res = await WXAPI.banners({
+        type: "index",
       });
+
+      if (res.code == 700) {
+        uni.showModal({
+          title: "提示",
+          content: "请在后台添加 banner 轮播图片，自定义类型填写 index",
+          showCancel: false,
+        });
+      } else {
+        data.banners = res.data;
+      }
+      this.setData(data);
     },
 
-    fetchShops(latitude, longitude, kw) {
-      var _a;
+    async fetchShops(latitude, longitude, kw) {
+      const res = await WXAPI.fetchShops({
+        curlatitude: latitude,
+        curlongitude: longitude,
+        nameLike: kw,
+      });
+      console.log("fetchShops ", res.data);
 
-      return __awaiter(this, void 0, void 0, function* () {
-        const res = yield WXAPI.fetchShops({
-          curlatitude: latitude,
-          curlongitude: longitude,
-          nameLike: kw,
+      if (getLocalStorage("parkId")) {
+        const index = res.data?.findIndex(
+          (item) => item.number === getLocalStorage("parkId")
+        );
+        this.setData({ index });
+      }
+
+      this.setData({
+        loadingHidden: true,
+        array: res.data.map((item) => item.name),
+        parkList: res.data,
+      });
+
+      if (res.code == 0) {
+        res.data.forEach((ele) => {
+          ele.distance = ele.distance.toFixed(3); // 距离保留3位小数
         });
-        console.log("fetchShops ", res.data);
-
-        if (getLocalStorage("parkId")) {
-          const index =
-            (_a = res.data) === null || _a === void 0
-              ? void 0
-              : _a.findIndex(
-                  (item) => item.number === getLocalStorage("parkId")
-                );
-          this.setData({
-            index,
-          });
-        }
-
         this.setData({
-          loadingHidden: true,
-          array: res.data.map((item) => item.name),
           parkList: res.data,
         });
-
-        if (res.code == 0) {
-          res.data.forEach((ele) => {
-            ele.distance = ele.distance.toFixed(3);
-          });
-          this.setData({
-            parkList: res.data,
-          });
-
-          if (!getLocalStorage("parkId")) {
-            const park = res.data[0];
-            setLocalStorage("parkId", park.number);
-            setLocalStorage("parkName", park.name);
-            uni.setStorageSync("shopInfo", park);
-            uni.setStorageSync("shopIds", park.id);
-          }
-        } else {
-          this.setData({
-            parkList: null,
-          });
+        // 若没有园区，默认选择最近的园区
+        if (!getLocalStorage("parkId")) {
+          const park = res.data[0];
+          setLocalStorage("parkId", park.number);
+          setLocalStorage("parkName", park.name);
+          uni.setStorageSync("shopInfo", park);
+          uni.setStorageSync("shopIds", park.id);
         }
-      });
+      } else {
+        this.setData({
+          parkList: null,
+        });
+      }
     },
 
-    categoriesFun() {
-      return __awaiter(this, void 0, void 0, function* () {
-        const res = yield WXAPI.goodsCategory();
-        let categories = [];
+    async categoriesFun() {
+      const res = await WXAPI.goodsCategory();
+      let categories = [];
 
-        if (res.code == 0) {
-          const _categories = res.data.filter((ele) => {
-            return ele.level == 1;
-          });
-
-          categories = categories.concat(_categories);
-        }
-
-        this.setData({
-          categories: categories,
-          activeCategoryId: 0,
-          curPage: 1,
+      if (res.code == 0) {
+        const _categories = res.data.filter((ele) => {
+          return ele.level == 1;
         });
+
+        categories = categories.concat(_categories);
+      }
+
+      this.setData({
+        categories: categories,
+        activeCategoryId: 0,
+        curPage: 1,
       });
     },
 
@@ -514,7 +430,6 @@ export default {
         });
       }
     },
-
   },
 };
 </script>
