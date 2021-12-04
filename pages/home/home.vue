@@ -419,14 +419,18 @@ export default {
         background: "#f4c998",
         message: "到底啦，2秒后自动跳转学习页面",
       });
-      setTimeout(funcName, 2000);
 
+      setTimeout(
+        uni.pageScrollTo({
+          scrollTop: 0,
+        }),
+        1500
+      );
+
+      setTimeout(funcName, 2000);
       function funcName() {
         uni.switchTab({
           url: "/pages/example/components",
-        });
-        uni.pageScrollTo({
-          scrollTop: 0,
         });
       }
     },

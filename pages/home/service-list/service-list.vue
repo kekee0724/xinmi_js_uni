@@ -32,9 +32,11 @@ export default {
   },
   props: {},
   onPageShow() {
-    this.getUserProfile();
+    
   },
-  mounted() {},
+  mounted() {
+      this.getUserProfile();
+  },
   methods: {
     async getUserProfile() {
       try {
