@@ -162,6 +162,13 @@ export default {
 };
 </script>
 <style>
+.bd {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  font-size: 13px;
+}
+
 .sever-box {
   padding: 14px 15px;
   background-color: #fff;
