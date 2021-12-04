@@ -9,6 +9,19 @@
     // },
     "pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
         {
+            "path": "pages/start/start",
+            "style": {
+                "navigationBarTitleText": " ",
+                "enablePullDownRefresh": false,
+                "disableScroll": true,
+                "navigationStyle": "custom"
+            }
+        },
+        {
+            "path": "pages/start/select",
+            "style": {}
+        },
+        {
             "path": "pages/example/components",
             "style": {
                 "navigationBarTitleText": "uView UI"
@@ -19,12 +32,60 @@
             "style": {}
         },
         {
+            "path": "pages/service/service",
+            "style": {}
+        },
+        // {
+        //     "path": "pages/discover/discover",
+        //     "style": {}
+        // },
+        // {
+        //     "path": "pages/my/my",
+        //     "style": {}
+        // },
+        {
             "path": "pages/search/search",
             "style": {
                 "navigationBarTitleText": "项目选址"
             }
         }
     ],
+    "tabBar": {
+        "color": "#acb9ca",
+        "selectedColor": "#02b8cd",
+        "position": "bottom",
+        "list": [{
+                "pagePath": "pages/index/index",
+                "text": "首页",
+                "iconPath": "static/images/icon/home.png",
+                "selectedIconPath": "static/images/icon/home-active.png"
+            },
+            {
+                "pagePath": "pages/service/service",
+                "text": "服务",
+                "iconPath": "static/images/icon/sever.png",
+                "selectedIconPath": "static/images/icon/sever-active.png"
+            },
+            {
+                "pagePath": "pages/example/components",
+                "text": "学习",
+                "iconPath": "static/images/icon/study.png",
+                "selectedIconPath": "static/images/icon/study-active.png"
+            },
+            {
+                "pagePath": "pages/discover/discover",
+                "text": "发现",
+                "iconPath": "static/images/icon/found.png",
+                "selectedIconPath": "static/images/icon/found-active.png"
+            },
+            {
+                "pagePath": "pages/my/my",
+                "text": "我的",
+                "iconPath": "static/images/icon/my.png",
+                "selectedIconPath": "static/images/icon/my-active.png"
+            }
+        ]
+    },
     "style": "v2",
     "sitemapLocation": "sitemap.json",
     "permission": {
