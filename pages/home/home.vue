@@ -157,30 +157,8 @@
           <!-- 热门活动 -->
           <!-- <hot-activity class="hot-activity" /> -->
 
-          <!-- 学习 -->
-          <view class="home-jcly">
-            <view class="title">
-              <view class="weui-flex">
-                <view
-                  class="weui-flex__item"
-                  style="font-size: 16px; padding: 0 20rpx"
-                  >学习</view
-                >
-                <view class="weui-flex__item text-right">
-                  <text
-                    @tap="moreArticle"
-                    class="primary-color morelink"
-                    style="padding: 0 20rpx"
-                    >更多</text
-                  >
-                </view>
-              </view>
-            </view>
-            <!-- <list :list="xw_list"></list> -->
-          </view>
-
-          <!-- <van-divider contentPosition="center"
-            >到底啦，更多数据请跳转学习模块</van-divider -->
+          <van-divider contentPosition="center"
+            >到底啦，更多数据请跳转学习模块</van-divider
           >
         </view>
       </scroll-view>
@@ -248,15 +226,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 const app = getApp();
 
-const app_1 = require("../../kek");
+const { AUTH, TOOLS, WXAPI } = require("../../kek");
 
-// const Notify = require("../../components/@vant/weapp/notify/notify");
-
+import { Notify } from "vant";
 // const {index_1} = require("../../core/index");
-const {
-  setLocalStorage,
-  getLocalStorage,
-} = require("../../core/funcs/storage");
+import { setLocalStorage, getLocalStorage } from "../../core/funcs/storage";
 // const task = require("../../../utils/request");
 
 export default {
@@ -325,7 +299,7 @@ export default {
 
       fail(e) {
         console.error(e);
-        app_1.AUTH.checkAndAuthorize("scope.userLocation");
+        AUTH.checkAndAuthorize("scope.userLocation");
       },
     });
     uni.showShareMenu({
@@ -344,48 +318,15 @@ export default {
       }
     }
 
-    console.log("app_1", app_1, app_1.AUTH);
-    app_1.AUTH.authorize().then((_res) => {
-      app_1.AUTH.bindSeller();
-      app_1.TOOLS.showTabBarBadge();
+    AUTH.authorize().then((_res) => {
+      AUTH.bindSeller();
+      TOOLS.showTabBarBadge();
     });
     this.initBanners();
     this.categoriesFun();
   },
   onShow() {
     this.refreshHomeData();
-  },
-  onPageScroll: function (e) {
-    let top = e.detail.scrollTop;
-    this.setData({
-      topStyle: `background-color: rgba(255, 255, 255, ${top * 0.01});
-          color: ${top < 40 ? "#bdbdbd" : "rgba(0,0,0," + top * 0.01 + ")"};
-          box-shadow: 0 0 4px rgba(0,0,0, ${
-            top * 0.001 < 0.7 ? top * 0.001 : 0.7
-          })`,
-      textColor: `color: ${
-        top < 40 ? "#bdbdbd" : "rgba(0,0,0," + top * 0.01 + ")"
-      };`,
-      susStyle: `opacity: ${1 - top * 0.01 <= 1 ? 1 - top * 0.01 : 1}`,
-    });
-  },
-  onReachBottom: function () {
-    console.log("onReachBottom");
-    // Notify.default({
-    //   background: "#f4c998",
-    //   message: "到底啦，2秒后自动跳转学习页面",
-    //   top: app.globalData.CustomBar,
-    // });
-    setTimeout(funcName, 2000);
-
-    function funcName() {
-      uni.switchTab({
-        url: "/pages/study/study",
-      });
-      uni.pageScrollTo({
-        scrollTop: 0,
-      });
-    }
   },
   methods: {
     closeThis() {
@@ -417,7 +358,7 @@ export default {
     initBanners() {
       return __awaiter(this, void 0, void 0, function* () {
         const data = {};
-        const res = yield app_1.WXAPI.banners({
+        const res = yield WXAPI.banners({
           type: "index",
         });
 
@@ -439,7 +380,7 @@ export default {
       var _a;
 
       return __awaiter(this, void 0, void 0, function* () {
-        const res = yield app_1.WXAPI.fetchShops({
+        const res = yield WXAPI.fetchShops({
           curlatitude: latitude,
           curlongitude: longitude,
           nameLike: kw,
@@ -489,7 +430,7 @@ export default {
 
     categoriesFun() {
       return __awaiter(this, void 0, void 0, function* () {
-        const res = yield app_1.WXAPI.goodsCategory();
+        const res = yield WXAPI.goodsCategory();
         let categories = [];
 
         if (res.code == 0) {
@@ -541,17 +482,39 @@ export default {
       });
     },
 
-    onPageScroll() {
-      console.log("占位：函数 onPageScroll 未声明");
+    onPageScroll(e) {
+      let top = e.scrollTop;
+      this.setData({
+        topStyle: `background-color: rgba(255, 255, 255, ${top * 0.01});
+          color: ${top < 40 ? "#bdbdbd" : "rgba(0,0,0," + top * 0.01 + ")"};
+          box-shadow: 0 0 4px rgba(0,0,0, ${
+            top * 0.001 < 0.7 ? top * 0.001 : 0.7
+          })`,
+        textColor: `color: ${
+          top < 40 ? "#bdbdbd" : "rgba(0,0,0," + top * 0.01 + ")"
+        };`,
+        susStyle: `opacity: ${1 - top * 0.01 <= 1 ? 1 - top * 0.01 : 1}`,
+      });
     },
 
     onReachBottom() {
-      console.log("占位：函数 onReachBottom 未声明");
+      Notify({
+        type: "primary",
+        background: "#f4c998",
+        message: "到底啦，2秒后自动跳转学习页面",
+      });
+      setTimeout(funcName, 2000);
+
+      function funcName() {
+        uni.switchTab({
+          url: "/pages/example/components",
+        });
+        uni.pageScrollTo({
+          scrollTop: 0,
+        });
+      }
     },
 
-    moreArticle() {
-      console.log("占位：函数 moreArticle 未声明");
-    },
   },
 };
 </script>

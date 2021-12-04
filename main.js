@@ -15,6 +15,13 @@ Polyfill.init();
 
 // 全局mixins，用于实现setData等功能，请勿删除！';
 import Mixin from './polyfill/mixins';
+import Vant from 'vant';
+// import 'vant/lib/index.css';
+import { Notify } from 'vant';
+
+// 全局注册
+Vue.use(Notify);
+Vue.use(Vant);
 
 Vue.mixin(Mixin);
 
