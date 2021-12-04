@@ -1,3 +1,10 @@
+<!--
+ * @Author: 可可同学
+ * @Date: 2021-12-03 20:28:42
+ * @LastEditTime: 2021-12-05 00:37:46
+ * @LastEditors: 可可同学
+ * @Description: 
+-->
 <template>
   <view>
     <image
@@ -36,7 +43,7 @@ export default {
       type: String,
       default: undefined,
     },
-    style: {
+    styles: {
       type: String,
       default: undefined,
     },
@@ -46,13 +53,13 @@ export default {
     },
   },
   watch: {
-    src_style_className: {
+    src_styles_className: {
       handler: function (newValue, oldValue) {
-        const { src, style, className } = newValue;
+        const { src, styles, className } = newValue;
 
         this.setData({
           ssrc: src ? transformAssetsUrl(src) : connectlocalUrl("error.png"),
-          sstyle: style,
+          sstyle: styles,
           sclass: src ? className : "erro-class",
           mode: src ? "aspectFill" : "aspectFit",
         });
@@ -72,12 +79,12 @@ export default {
     },
   },
   computed: {
-    src_style_className() {
-      const { src, style, className } = this;
+    src_styles_className() {
+      const { src, styles, className } = this;
 
       return {
         src,
-        style,
+        styles,
         className,
       };
     },
