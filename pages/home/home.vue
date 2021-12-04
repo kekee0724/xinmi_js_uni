@@ -397,19 +397,20 @@ export default {
 
     refreshHomeData() {
       const child1 = this.$mp.page.selectComponent(".hot-activity");
-    //   const child2 = this.$mp.page.selectComponent(".notice");
-      const child4 = this.$mp.page.selectComponent(".service-list");
-    //   const child3 = this.$mp.page.selectComponent(".home-white");
-      console.log("child4", child4);
-      child4 && child4.getUserProfile();
+      const child2 = this.$mp.page.selectComponent(".notice");
+      const child3 = this.$mp.page.selectComponent(".service-list");
+      //   const child4 = this.$mp.page.selectComponent(".home-white");
+      console.log("child2", child2);
       child1 && child1.fetchNews();
+      child2 && child2.getNotice();
+      child3 && child3.getUserProfile();
 
       //   if (isAuth()) {
       //     child2 && child2.getNotice();
       //   }
 
       //   if (isAuth()) {
-      //     child3 && child3.getInitData();
+      //     child4 && child4.getInitData();
       //   }
     },
 
