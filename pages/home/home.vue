@@ -100,7 +100,7 @@
           </block>
         </swiper>
         <!-- 园区通告 -->
-        <!-- <index-notice class="notice" /> -->
+        <index-notice class="notice" />
 
         <!-- <service-list class="service-list" /> -->
 
@@ -179,7 +179,7 @@ import loading from "@/components/loading/loading";
 // import serviceList from "../service-list/service-list";
 // import hotActivity from "../hot-activity/hot-activity";
 // import homeArticle from "../home-article/home-article";
-// import indexNotice from "../index-notice/index-notice";
+import indexNotice from "./index-notice/index-notice";
 
 import { AUTH, TOOLS, WXAPI } from "../../kek";
 
@@ -196,7 +196,7 @@ export default {
     // serviceList,
     // hotActivity,
     // homeArticle,
-    // indexNotice,
+    indexNotice,
   },
   data() {
     return {
@@ -471,14 +471,14 @@ nav-bar {
   z-index: 1;
   padding: 26rpx 20rpx;
 }
-.index-notice .tips {
+.index-notice /deep/ .tips {
   width: 76rpx;
   height: 67rpx;
 }
-.index-notice swiper {
+.index-notice /deep/ swiper {
   height: 100%;
 }
-.index-notice swiper swiper-item {
+.index-notice /deep/ swiper swiper-item {
   vertical-align: middle;
   line-height: 66rpx;
   overflow: hidden;
