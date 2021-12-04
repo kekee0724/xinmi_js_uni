@@ -102,7 +102,7 @@
         <!-- 园区通告 -->
         <index-notice class="notice" />
 
-        <!-- <service-list class="service-list" /> -->
+        <service-list class="service-list" />
 
         <view class="home">
           <!-- 前端字典等 -->
@@ -176,7 +176,7 @@ import navBar from "@/components/nav-bar/nav-bar";
 import susPanel from "@/components/suspension/suspension";
 import loading from "@/components/loading/loading";
 
-// import serviceList from "../service-list/service-list";
+import serviceList from "./service-list/service-list";
 // import hotActivity from "../hot-activity/hot-activity";
 // import homeArticle from "../home-article/home-article";
 import indexNotice from "./index-notice/index-notice";
@@ -193,7 +193,7 @@ export default {
     navBar,
     susPanel,
     loading,
-    // serviceList,
+    serviceList,
     // hotActivity,
     // homeArticle,
     indexNotice,
