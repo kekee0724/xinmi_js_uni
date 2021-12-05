@@ -93,67 +93,29 @@
                 <text class="icon-text">签到</text>
               </view>
               <view
-                @tap="goToUrl"
-                data-url="/api-mall/order-list/index"
+                v-if="!userin.gitee_token"
+                @tap="tz"
+                data-a="user/gitee_login/index"
                 class="weui-flex__item pt8"
               >
                 <view class="icon-image">
                   <view class="t-icon t-icon-youhuijuan"></view>
                 </view>
-                <text class="icon-text">需求</text>
+                <text class="icon-text">绑定码云</text>
+              </view>
+              <view
+                v-else
+                @tap="logout"
+                data-a="user/gitee_login/index"
+                class="weui-flex__item pt8"
+              >
+                <view class="icon-image">
+                  <view class="t-icon t-icon-youhuijuan"></view>
+                </view>
+                <text class="icon-text">切换仓库</text>
               </view>
             </view>
           </block>
-        </view>
-
-        <view class="wx-card">
-          <view
-            class="user-section"
-            :style="'padding-top:' + (CustomBar - 10) + 'px;'"
-          >
-            <view
-              class="bd_user"
-              v-if="!userin.gitee_token"
-              @tap="tz"
-              data-a="user/gitee_login/index"
-              >绑定码云</view
-            >
-            <view
-              class="bd_user"
-              v-else
-              @tap="logout"
-              data-a="user/gitee_login/index"
-              >切换仓库</view
-            >
-            <view class="tj-sction">
-              <!-- <view class="tj-item" bindtap="tz" data-a="user/note/index"><text class="num">{{ nt
-                            ||0}}</text><text class="num2">日记</text>
-                    </view> -->
-              <view class="tj-item" @tap="tz" data-a="user/collect/index">
-                <text class="num">{{ sc || 0 }}</text>
-                <text class="num2">收藏</text>
-              </view>
-              <view class="tj-item" @tap="tz" data-a="user/collect/index">
-                <text class="num">{{ dz || 0 }}</text>
-                <text class="num2">点赞</text>
-              </view>
-              <view class="tj-item" @tap="tz" data-a="user/problem_list/index">
-                <text class="num">{{ tk || 0 }}</text>
-                <text class="num2">题库</text>
-              </view>
-            </view>
-            <view class="vip-card-box">
-              <view class="b-btn" @tap="tz" data-a="user/sign/index"
-                >立刻签到</view
-              >
-              <view class="tit">
-                <text class="yticon icon-iLinkapp-"></text>
-                您已签到{{ userin.sign || 0 }}天
-              </view>
-              <text class="e-m">可可时光代理人</text>
-              <text class="e-b">为美好世界而编程</text>
-            </view>
-          </view>
         </view>
 
         <view class="wx-card">
@@ -203,41 +165,6 @@
               </view>
               <view class="weui-cell__ft weui-cell__ft_in-access"></view>
             </view>
-            <view
-              @tap="goToUrl"
-              data-url="/api-ai/index/index"
-              class="weui-cell weui-cell_access"
-              hover-class="weui-cell_active"
-            >
-              <view class="weui-cell__bd">
-                <view class="t-icon t-icon-mylist1"></view>
-                我的相册
-              </view>
-              <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-            </view>
-            <view
-              v-if="isAuth"
-              @tap="toCollect"
-              class="weui-cell weui-cell_access"
-              hover-class="weui-cell_active"
-            >
-              <view class="weui-cell__bd">
-                <view class="t-icon t-icon-mylist3"></view>
-                文章收藏
-              </view>
-              <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-            </view>
-            <navigator
-              url="/api-mall/goods/fav"
-              class="weui-cell weui-cell_access"
-              hover-class="weui-cell_active"
-            >
-              <view class="weui-cell__bd">
-                <view class="t-icon t-icon-mylist3"></view>
-                资源收藏
-              </view>
-              <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-            </navigator>
           </view>
         </view>
         <view class="wx-card">
@@ -310,8 +237,6 @@ export default {
           nick: "",
         },
       },
-
-      CustomBar: 0,
     };
   },
   onLoad: function () {

@@ -44,10 +44,10 @@
                 "navigationStyle": "custom"
             }
         },
-        // {
-        //     "path": "pages/discover/discover",
-        //     "style": {}
-        // },
+        {
+            "path": "pages/discover/discover",
+            "style": {}
+        },
         {
             "path": "pages/my/my",
             "style": {}
@@ -64,7 +64,7 @@
         "selectedColor": "#02b8cd",
         "position": "bottom",
         "list": [{
-                "pagePath": "pages/index/index",
+                "pagePath": "pages/home/home",
                 "text": "首页",
                 "iconPath": "static/images/icon/home.png",
                 "selectedIconPath": "static/images/icon/home-active.png"
@@ -82,7 +82,7 @@
                 "selectedIconPath": "static/images/icon/study-active.png"
             },
             {
-                "pagePath": "pages/home/home",
+                "pagePath": "pages/discover/discover",
                 "text": "发现",
                 "iconPath": "static/images/icon/found.png",
                 "selectedIconPath": "static/images/icon/found-active.png"
