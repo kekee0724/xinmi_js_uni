@@ -1,5 +1,5 @@
 {
-    "name" : "k",
+    "name" : "可可前端",
     "appid" : "__UNI__2C54416",
     "description" : "基于多平台快速开发的UI框架开发",
     "versionName" : "1.0.0",
@@ -99,7 +99,7 @@
         "appid" : "wxd6850744a438809a",
         "setting" : {
             "urlCheck" : false,
-            "es6" : false,
+            "es6" : true,
             "minified" : false,
             "postcss" : false
         },
