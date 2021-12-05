@@ -449,22 +449,22 @@ export default {
 .flex-img .weui-flex__item {
   padding: 0 10rpx;
 }
-.activity-list .item {
+.phone-warp /deep/ .activity-list .item {
   width: 100%;
 }
-.activity-list .item:last-child {
+.phone-warp /deep/ .activity-list .item:last-child {
   margin-bottom: 0;
 }
-.activity-list .activity-img-box {
+.phone-warp /deep/ .activity-list .activity-img-box {
   position: relative;
   height: 405rpx;
   border-radius: 12rpx;
   overflow: hidden;
 }
-.activity-list .activity-img-box images {
+.phone-warp /deep/ .activity-list .activity-img-box images {
   border-radius: 12rpx;
 }
-.activity-list .activity-img-box .label {
+.phone-warp /deep/ .activity-list .activity-img-box .label {
   width: 75px;
   height: 22px;
   color: #fff;
@@ -475,23 +475,23 @@ export default {
   text-align: center;
   line-height: 22px;
 }
-.activity-list .activity-img-box .label.end {
+.phone-warp /deep/ .activity-list .activity-img-box .label.end {
   background-color: #a4a4a4;
 }
-.activity-list .activity-img-box .label.in {
+.phone-warp /deep/ .activity-list .activity-img-box .label.in {
   background-color: #05b8cd;
 }
-.activity-list .activity-img-box .label.regist {
+.phone-warp /deep/ .activity-list .activity-img-box .label.regist {
   background-color: #ff7600;
 }
-.activity-list .activity-img-box image {
-  height: 100%;
+.phone-warp /deep/ .activity-list .activity-img-box image {
+  /* height: 100%; */
   width: 100%;
 }
-.activity-list .content {
+.phone-warp /deep/ .activity-list .content {
   padding: 20rpx 0;
 }
-.activity-list .content .title {
+.phone-warp /deep/ .activity-list .content .title {
   font-size: 32rpx;
   margin-bottom: 15rpx;
 }
