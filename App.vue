@@ -6,6 +6,7 @@ let events = [];
 export default {
   data() {},
   globalData: {
+    discoverIndex: 0,
     netWorkstate: true,
     isConnected: true,
     theme: "dark",

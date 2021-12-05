@@ -130,11 +130,11 @@
 
 <script>
 "use strict";
-// import activityList from '../activity/activity';
-// import articleDiscover from '../article/article-discover';
-// import circleDiscover from '../circle/circle-discover';
-// import warehouse from '../warehouse/index';
-// import dictionaries from '../answer/index';
+// import activityList from './activity/activity';
+// import articleDiscover from './article/article-discover';
+import circleDiscover from './circle/circle-discover';
+// import warehouse from './warehouse/index';
+// import dictionaries from './answer/index';
 
 import { isAnonymous, isAuth } from "../../core/http/auth";
 
@@ -145,7 +145,7 @@ export default {
   components: {
     // activityList,
     // articleDiscover,
-    // circleDiscover,
+    circleDiscover,
     // warehouse,
     // dictionaries
   },

@@ -52,3 +52,26 @@
 .wx-card .weui-card-cells .weui-cell.weui-cell_select {
     padding-left: 32rpx;
 }
+
+
+/*更多*/
+
+.morelink {
+    color: #02b8cd;
+}
+
+.morelink::after {
+    content: " ";
+    position: relative;
+    top: -2rpx;
+    display: inline-block;
+    height: 14rpx;
+    width: 14rpx;
+    border-width: 2rpx 2rpx 0 0;
+    border-color: #02b8cd;
+    border-style: solid;
+    transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+}
+
+
+/*更多-end*/
