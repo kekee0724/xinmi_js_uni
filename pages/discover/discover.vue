@@ -130,7 +130,7 @@
 
 <script>
 "use strict";
-// import activityList from './activity/activity';
+import activityList from './activity/activity';
 // import articleDiscover from './article/article-discover';
 import circleDiscover from './circle/circle-discover';
 // import warehouse from './warehouse/index';
@@ -143,7 +143,7 @@ import { DiscoverTypeEnum } from "./common/common";
 const app = getApp();
 export default {
   components: {
-    // activityList,
+    activityList,
     // articleDiscover,
     circleDiscover,
     // warehouse,
