@@ -156,7 +156,7 @@
           <home-article class="hot-article"></home-article>
 
           <!-- 热门活动 -->
-          <!-- <hot-activity class="hot-activity" /> -->
+          <hot-activity class="hot-activity" />
 
           <van-divider contentPosition="center"
             >到底啦，更多数据请跳转学习模块</van-divider
@@ -177,7 +177,7 @@ import susPanel from "@/components/suspension/suspension";
 import loading from "@/components/loading/loading";
 
 import serviceList from "./service-list/service-list";
-// import hotActivity from "../hot-activity/hot-activity";
+import hotActivity from "./hot-activity/hot-activity";
 import homeArticle from "./home-article/home-article";
 import indexNotice from "./index-notice/index-notice";
 
@@ -194,7 +194,7 @@ export default {
     susPanel,
     loading,
     serviceList,
-    // hotActivity,
+    hotActivity,
     homeArticle,
     indexNotice,
   },
@@ -553,29 +553,30 @@ nav-bar {
   overflow: hidden;
   text-align: center;
 }
-.index-card /deep/ .index-headline .item .img /deep/ uni-image {
-  width: 100%;
-  height: 100%;
+.index-card /deep/ .index-headline .item .img uni-image {
+  /* width: 100%;
+  height: 100%; */
 }
-.activity-list {
+.index-card /deep/ .activity-list {
   padding: 0 30rpx;
 }
-.activity-list .item {
+.index-card /deep/ .activity-list .item {
   margin-bottom: 24rpx;
 }
-.activity-list .item:last-child {
+.index-card /deep/ .activity-list .item:last-child {
   margin-bottom: 0;
 }
-.activity-list .activity-img-box {
+.index-card /deep/ .activity-list .activity-img-box {
   position: relative;
   height: 405rpx;
   border-radius: 12rpx;
   overflow: hidden;
 }
-.activity-list .activity-img-box images {
+.index-card /deep/ .activity-list .activity-img-box uni-image {
   border-radius: 12rpx;
+  width: 100%;
 }
-.activity-list .activity-img-box .label {
+.index-card /deep/ .activity-list .activity-img-box .label {
   width: 75px;
   height: 22px;
   color: #fff;
@@ -586,20 +587,20 @@ nav-bar {
   text-align: center;
   line-height: 22px;
 }
-.activity-list .activity-img-box .label.end {
+.index-card /deep/ .activity-list .activity-img-box .label.end {
   background-color: #a4a4a4;
 }
-.activity-list .activity-img-box .label.in {
+.index-card /deep/ .activity-list .activity-img-box .label.in {
   background-color: #05b8cd;
 }
-.activity-list .activity-img-box /deep/ uni-image {
-  height: 100%;
-  width: 100%;
+.index-card /deep/ .activity-list .activity-img-box uni-image {
+  /* height: 100%;
+  width: 100%; */
 }
-.activity-list .content {
+.index-card /deep/ .activity-list .content {
   padding: 20rpx 0;
 }
-.activity-list .content .title {
+.index-card /deep/ .activity-list .content .title {
   font-size: 32rpx;
   margin-bottom: 15rpx;
 }
