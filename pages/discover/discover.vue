@@ -131,7 +131,7 @@
 <script>
 "use strict";
 import activityList from './activity/activity';
-// import articleDiscover from './article/article-discover';
+import articleDiscover from './article/article-discover';
 import circleDiscover from './circle/circle-discover';
 // import warehouse from './warehouse/index';
 // import dictionaries from './answer/index';
@@ -144,7 +144,7 @@ const app = getApp();
 export default {
   components: {
     activityList,
-    // articleDiscover,
+    articleDiscover,
     circleDiscover,
     // warehouse,
     // dictionaries
