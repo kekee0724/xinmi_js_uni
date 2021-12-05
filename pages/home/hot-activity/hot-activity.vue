@@ -26,8 +26,8 @@
         </view>
 
         <view class="content pb0">
-          <view class="title omit omit-1">{{ item.title }}</view>
-          <view class="weui-flex" style="margin-left: -50rpx">
+          <view class="omit omit-1">{{ item.title }}</view>
+          <view class="weui-flex">
             <view class="weui-flex__item gray-four-color omit omit-1 size-12">
               <text class="icon icon-newtime size-12 mr5"></text>
               {{ item.descript }}
@@ -41,7 +41,6 @@
           <view
             v-if="item.video !== ''"
             class="size-13 gray-four-color omit omit-1"
-            style="margin-left: -50rpx"
           >
             <text class="icon icon-newadds size-13 mr5 gray-four-color"></text>
             {{ item.video }}
