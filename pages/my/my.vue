@@ -183,7 +183,7 @@
           </view>
         </view>
       </scroll-view>
-      <float-menu />
+      <!-- <float-menu /> -->
     </view>
   </view>
 </template>

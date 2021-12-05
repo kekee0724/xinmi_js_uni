@@ -11,6 +11,10 @@ export default {
     isConnected: true,
     theme: "dark",
     access_token: null,
+    config: {
+      apiUrl: "https://gitee.com/",
+      mock: false,
+    },
     eventOn: function (c, fun) {
       events.push({
         code: c,
@@ -130,9 +134,52 @@ export default {
         }
       });
     },
+    getUserInfo: function (callback) {
+      if (this.access_token) {
+        uni.request({
+          url: this.config.apiUrl + "api/v5/user",
+          method: "GET",
+          data: {
+            access_token: this.access_token,
+          },
+          success: (result) => {
+            if (result.data.hasOwnProperty("id")) {
+              this.userInfo = result.data;
+              callback(true);
+            } else {
+              callback(false);
+            }
+          },
+        });
+      } else {
+        this.access_token = uni.getStorageSync("access_token");
+        if (this.access_token) {
+          this.getUserInfo(callback);
+        } else {
+          callback(false);
+        }
+      }
+    },
+    loginFirst: function () {
+      uni.hideLoading();
+      uni.showModal({
+        title: "请先绑定",
+        content: "你需要绑定仓库才能操作",
+        showCancel: true,
+        confirmText: "确定",
+        cancelText: "取消",
+        success(_res) {},
+      });
+    },
     logout: function () {
       uni.removeStorageSync("access_token");
       this.access_token = null;
+    },
+    loadFont() {
+      uni.loadFontFace({
+        family: "Roboto",
+        source: "url(https://static.hamm.cn/font/Gotham-Book.woff2)",
+      });
     },
   },
   onLaunch: function () {
