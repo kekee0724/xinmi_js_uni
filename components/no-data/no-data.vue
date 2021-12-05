@@ -1,3 +1,10 @@
+<!--
+ * @Author: 可可同学
+ * @Date: 2021-12-03 20:28:42
+ * @LastEditTime: 2021-12-05 22:31:15
+ * @LastEditors: 可可同学
+ * @Description: 
+-->
 <template>
   <view class="contain" :style="'height:' + height + ';'">
     <view class="result-message">
@@ -8,7 +15,7 @@
 </template>
 
 <script>
-const { connectlocalUrl } = require("../../core/funcs/transform.url");
+import { connectlocalUrl } from "../../core/funcs/transform.url";
 
 export default {
   data() {

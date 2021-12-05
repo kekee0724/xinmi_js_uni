@@ -181,7 +181,7 @@ import hotActivity from "./hot-activity/hot-activity";
 import homeArticle from "./home-article/home-article";
 import indexNotice from "./index-notice/index-notice";
 
-import { AUTH, TOOLS, WXAPI } from "../../kek";
+import { AUTH, WXAPI } from "../../kek";
 
 import { Notify } from "vant";
 
@@ -257,7 +257,7 @@ export default {
 
     AUTH.authorize().then((_res) => {
       AUTH.bindSeller();
-      TOOLS.showTabBarBadge();
+      // TOOLS.showTabBarBadge();
     });
     this.initBanners();
     this.categoriesFun();

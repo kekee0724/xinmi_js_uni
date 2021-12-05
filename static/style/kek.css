@@ -21,3 +21,34 @@
 .nav-box.align-right {
     justify-content: end;
 }
+
+.wx-card {
+    margin: 30rpx;
+    background-color: #ffffff;
+    padding: 30rpx;
+    border-radius: 12rpx;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 0 20rpx 0;
+    overflow: hidden;
+}
+
+.wx-card .wx-card-title {
+    margin-bottom: 30rpx;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.wx-card .weui-card-cells {
+    margin: -30rpx;
+}
+
+.wx-card .weui-card-cells::before,
+.wx-card .weui-card-cells::after {
+    display: none;
+}
+
+.wx-card .weui-card-cells .weui-cell::before {
+    right: 32rpx;
+}
+
+.wx-card .weui-card-cells .weui-cell.weui-cell_select {
+    padding-left: 32rpx;
+}

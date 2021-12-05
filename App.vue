@@ -9,6 +9,7 @@ export default {
     netWorkstate: true,
     isConnected: true,
     theme: "dark",
+    access_token: null,
     eventOn: function (c, fun) {
       events.push({
         code: c,
@@ -127,6 +128,10 @@ export default {
           }
         }
       });
+    },
+    logout: function () {
+      uni.removeStorageSync("access_token");
+      this.access_token = null;
     },
   },
   onLaunch: function () {

@@ -48,10 +48,10 @@
         //     "path": "pages/discover/discover",
         //     "style": {}
         // },
-        // {
-        //     "path": "pages/my/my",
-        //     "style": {}
-        // },
+        {
+            "path": "pages/my/my",
+            "style": {}
+        },
         {
             "path": "pages/search/search",
             "style": {
