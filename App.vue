@@ -1,78 +1,164 @@
-<!--
- * @Author: 可可同学
- * @Date: 2021-11-19 15:56:58
- * @LastEditTime: 2021-12-03 21:33:09
- * @LastEditors: 可可同学
- * @Description: 
--->
-<script>
-//app.js
-require("./reco.config");
+<template>
+  <div id="app">
+    <router-view />
+  </div>
+</template>
 
-var events = [];
+<script>
+/* eslint-disable no-undef */
+import { mapMutations } from 'vuex'
+import { version } from './package.json'
 export default {
-  data() {
-    return {};
+  onLaunch: function() {
+    // #ifdef H5
+    console.log(
+      `%c hello uniapp %c v${version} %c`,
+      'background:#35495e ; padding: 1px; border-radius: 3px 0 0 3px;  color: #fff',
+      'background:#007aff ;padding: 1px; border-radius: 0 3px 3px 0;  color: #fff; font-weight: bold;',
+      'background:transparent'
+    )
+    // #endif
+    // 线上示例使用
+    // console.log('%c uni-app官方团队诚邀优秀前端工程师加盟，一起打造更卓越的uni-app & uniCloud，欢迎投递简历到 hr2013@dcloud.io', 'color: red')
+    console.log('App Launch')
+    // #ifdef APP-PLUS
+    // App平台检测升级，服务端代码是通过uniCloud的云函数实现的，详情可参考：https://ext.dcloud.net.cn/plugin?id=2226
+    if (plus.runtime.appid !== 'HBuilder') {
+      // 真机运行不需要检查更新，真机运行时appid固定为'HBuilder'，这是调试基座的appid
+      uni.request({
+        url: 'https://7a3e3fa9-7820-41d0-be80-11927ac2026c.bspapp.com/http/update', // 检查更新的服务器地址
+        data: {
+          appid: plus.runtime.appid,
+          version: plus.runtime.version,
+          imei: plus.device.imei,
+        },
+        success: (res) => {
+          if (res.statusCode === 200 && res.data.isUpdate) {
+            // 提醒用户更新
+            uni.showModal({
+              title: '更新提示',
+              content: res.data.note ? res.data.note : '是否选择更新',
+              success: (ee) => {
+                if (ee.confirm) {
+                  plus.runtime.openURL(res.data.url)
+                }
+              },
+            })
+          }
+        },
+      })
+    }
+
+    // 一键登录预登陆，可以显著提高登录速度
+    uni.preLogin({
+      provider: 'univerify',
+      success: (res) => {
+        // 成功
+        this.setUniverifyErrorMsg()
+        console.log('preLogin success: ', res)
+      },
+      fail: (res) => {
+        this.setUniverifyLogin(false)
+        this.setUniverifyErrorMsg(res.errMsg)
+        // 失败
+        console.log('preLogin fail res: ', res)
+      },
+    })
+    // #endif
+  },
+  onShow: function() {
+    console.log('App Show')
+  },
+  onHide: function() {
+    console.log('App Hide')
   },
   globalData: {
-    netWorkstate: true,
-    theme: "dark",
-    eventOn: function (c, fun) {
-      events.push({
-        code: c,
-        fun: fun,
-      });
-    },
-    eventClear: function (c) {
-      events = events.filter(function (x) {
-        return x.code !== c;
-      });
-    },
-    eventTrigger: function (code, data) {
-      var es = events.filter(function (s) {
-        return s.code === code;
-      });
-      var result = [];
-      es.forEach(function (e) {
-        if (e.fun) {
-          result.push(e.fun(data));
-        }
-      });
-      return result.length >= 1 ? result[0] : result;
-    },
+    test: '',
   },
-  onLaunch: function () {
-    var that = this;
-    var menuButtonObject = uni.getMenuButtonBoundingClientRect();
-    // console.log("menuButtonObject", menuButtonObject)
-    uni.getSystemInfo({
-      success: function (res) {
-        console.log("getSystemInfo", res);
-        // var statusBarHeight = res.statusBarHeight;
-        // var navTop = menuButtonObject.top;
-        // var navHeight = statusBarHeight + menuButtonObject.height + (menuButtonObject.top -
-        // 	statusBarHeight) * 2;
-        // that.globalData.navHeight = navHeight;
-        // that.globalData.navTop = navTop;
-        that.globalData.windowHeight = res.windowHeight;
-        that.globalData.navColor = "#fff";
-      },
-      fail: function (err) {
-        console.log(err);
-      },
-    });
-
-    if (!wx.cloud) {
-      console.warn("请使用 2.2.3 或以上的基础库以使用云能力");
-    } else {
-      wx.cloud.init({
-        traceUser: true,
-        env: "dev-4gju2hza605fd6b2",
-      });
-    }
+  methods: {
+    ...mapMutations(['setUniverifyErrorMsg', 'setUniverifyLogin']),
   },
-};
+}
 </script>
+
 <style>
-@import "./app.css";
+/* #ifndef APP-PLUS-NVUE */
+/* uni.css - 通用组件、模板样式库，可以当作一套ui库应用 */
+@import "./common/uni.css";
+
+/* H5 兼容 pc 所需 */
+/* #ifdef H5 */
+@media screen and (min-width: 768px) {
+  body {
+    overflow-y: scroll;
+  }
+}
+
+/* 顶栏通栏样式 */
+/* .uni-top-window {
+  left: 0;
+  right: 0;
+} */
+
+uni-page-body {
+  background-color: #f5f5f5 !important;
+  min-height: 100% !important;
+  height: auto !important;
+}
+
+.uni-top-window uni-tabbar .uni-tabbar {
+  background-color: #fff !important;
+}
+
+.uni-app--showleftwindow .hideOnPc {
+  display: none !important;
+}
+
+/* #endif */
+
+/* 以下样式用于 hello uni-app 演示所需 */
+page {
+  background-color: #efeff4;
+  height: 100%;
+  font-size: 28rpx;
+  line-height: 1.8;
+}
+
+.fix-pc-padding {
+  padding: 0 50px;
+}
+
+.uni-header-logo {
+  padding: 30rpx;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10rpx;
+}
+
+.uni-header-image {
+  width: 100px;
+  height: 100px;
+}
+
+.uni-hello-text {
+  color: #7a7e83;
+}
+
+.uni-hello-addfile {
+  text-align: center;
+  line-height: 300rpx;
+  background: #fff;
+  padding: 50rpx;
+  margin-top: 10px;
+  font-size: 38rpx;
+  color: #808080;
+}
+
+/* #endif*/
+</style>
+
+<style lang="less">
+@import "./static/styles/index.css";
+// @import '~@styles/variables.less';
 </style>

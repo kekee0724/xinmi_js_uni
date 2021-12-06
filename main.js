@@ -1,31 +1,39 @@
-import App from './App';
-
-// Api函数polyfill（目前为实验版本，如不需要，可删除！）';
-import Polyfill from './polyfill/polyfill';
-Polyfill.init();
-
-// 全局mixins，用于实现setData等功能，请勿删除！';
-import Mixin from './polyfill/mixins';
+import App from './App'
+import store from './store'
 
 // #ifndef VUE3
-import Vue from 'vue';
-
-Vue.mixin(Mixin);
-Vue.config.productionTip = false;
-App.mpType = 'app';
+import Vue from 'vue'
+Vue.config.productionTip = false
+Vue.prototype.$store = store
+Vue.prototype.$adpid = '1111111111'
+Vue.prototype.$backgroundAudioData = {
+  playing: false,
+  playTime: 0,
+  formatedPlayTime: '00:00:00'
+}
+App.mpType = 'app'
 const app = new Vue({
-    ...App
-});
-app.$mount();
+  store,
+  ...App
+})
+app.$mount()
 // #endif
 
 // #ifdef VUE3
-import { createSSRApp } from 'vue';
+import {
+  createSSRApp
+} from 'vue'
 export function createApp() {
-    const app = createSSRApp(App);
-    app.mixin(Mixin);
-    return {
-        app
-    };
+  const app = createSSRApp(App)
+  app.use(store)
+  app.config.globalProperties.$adpid = '1111111111'
+  app.config.globalProperties.$backgroundAudioData = {
+    playing: false,
+    playTime: 0,
+    formatedPlayTime: '00:00:00'
+  }
+  return {
+    app
+  }
 }
 // #endif
