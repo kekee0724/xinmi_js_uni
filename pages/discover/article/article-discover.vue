@@ -111,10 +111,7 @@
         </view>
       </view>
     </super-scroll-view>
-    <view class="whitespace-md dark"></view>
-    <view class="whitespace-md dark"></view>
-    <view class="whitespace-md dark"></view>
-    <view class="whitespace-md dark"></view>
+    <view class="whitespace-md dark mt40"></view>
   </view>
 </template>
 
