@@ -27,7 +27,10 @@
           >
             <view class="list-container">
               <view class="weui-flex">
-                <view class="weui-flex__item size-16 omit omit-3">
+                <view
+                  class="weui-flex__item size-16 omit omit-3"
+                  style="min-width: 238px"
+                >
                   {{ item.title }}
                 </view>
                 <image-auto
@@ -108,6 +111,10 @@
         </view>
       </view>
     </super-scroll-view>
+    <view class="whitespace-md dark"></view>
+    <view class="whitespace-md dark"></view>
+    <view class="whitespace-md dark"></view>
+    <view class="whitespace-md dark"></view>
   </view>
 </template>
 
