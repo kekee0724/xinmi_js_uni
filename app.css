@@ -2,10 +2,10 @@
 @import "./static/style/style.css";
 @import "./static/style/iconfont.css";
 @import "./static/style/main.css";
-@import "./static/style/kek.css";
 
-/* @import "./static/style/common.css"; */
+/* @import "./static/style/kek.css"; */
 
+@import "./static/style/common.css";
 page {
     background-color: #ededed;
     font-size: 16px;

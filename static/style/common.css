@@ -91,7 +91,7 @@ page,
 body {
     height: 100%;
     width: 100%;
-    overflow: hidden;
+    /* overflow: hidden; */
     font-size: 26rpx;
 }
 
