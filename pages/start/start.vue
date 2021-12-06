@@ -117,11 +117,11 @@ export default {
 
         if (shopMod == 1) {
           uni.redirectTo({
-            url: "/api-mall/shop/select",
+            url: "/pages/start/select",
           });
         } else {
           uni.navigateTo({
-            url: "/api-main/index/index",
+            url: "/pages/index/index",
           });
         }
       } else {
