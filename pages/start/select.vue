@@ -160,9 +160,9 @@ export default {
       uni.setStorageSync("shopIds", this.shops[idx].id);
       setLocalStorage("parkId", this.shops[idx].number);
       setLocalStorage("parkName", this.shops[idx].name);
-      console.log(idx)
+      console.log("goShop",idx)
       uni.switchTab({
-        url: "/pages/index/index",
+        url: "/pages/home/home",
       });
     },
   },
