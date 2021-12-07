@@ -1,7 +1,13 @@
+<template>
+  <div id="app">
+    <router-view />
+  </div>
+</template>
+
 <script>
 /* eslint-disable no-undef */
 import { mapMutations } from 'vuex'
-import { version } from './package.json'
+import { version } from '../package.json'
 export default {
   onLaunch: function() {
     // #ifdef H5
