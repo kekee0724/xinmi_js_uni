@@ -153,7 +153,7 @@ page {
 </style>
 
 <style lang="less">
-@import "./static/styles/index.css";
+// @import "./static/styles/index.css";
 // @import '~@styles/variables.less';
 
 body {
