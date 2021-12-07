@@ -9,6 +9,8 @@ import 'vant/lib/index.css'
 import request from '../static/common/request'
 import '../static/common/flexible'
 
+import '../static/styles/index.css'
+
 // 引入 Vant 基础组件及弹窗
 import { Button, Cell, CellGroup, Icon, Row, Col, Popup, Toast, Dialog } from 'vant'
 
