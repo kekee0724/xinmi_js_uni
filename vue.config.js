@@ -1,5 +1,5 @@
 // const autoprefixer = require('autoprefixer')
-const pxtorem = require('postcss-pxtorem')
+// const pxtorem = require('postcss-pxtorem')
 const path = require('path')
 
 console.info(process.env.NODE_ENV)
@@ -22,6 +22,7 @@ module.exports = {
       },
       '/shop_api': {
         target: 'https://api.it120.cc/xiaochengxu',
+        // target: 'https://api.it120.cc/kekee0724',
         changeOrigin: true, // target是域名的话，需要这个参数，
         secure: false, // 设置支持https协议的代理
         pathRewrite: { '^/shop_api': '' }

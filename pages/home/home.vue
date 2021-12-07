@@ -16,7 +16,7 @@
     </van-swipe>
     <div class="main">
       <div class="section-header common-h2" v-if="listKanjia.length"><span class="common-h2-title">疯狂砍价</span></div>
-      <div class="list">
+      <div class="list" v-if="listKanjia.length">
         <van-row>
           <van-col span="12" v-for="item in listKanjia" :key="item.id">
             <div class="list-item" @click="onDetailClick(item.id)">
@@ -100,7 +100,7 @@ export default {
       list: [],
       listKanjia: [],
       listPintuan: [],
-      pintuanSets: {},
+      pintuanSets: [],
       goodsMap: {}
     }
   },
@@ -142,6 +142,7 @@ export default {
     },
     getBannerList() {
       this.$request.get('/banner/list', { type: 'indexBanner' }).then(res => {
+        console.log(res)
         this.banner = res.data
       })
     },
