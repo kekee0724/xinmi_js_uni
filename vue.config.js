@@ -1,4 +1,4 @@
-const autoprefixer = require('autoprefixer')
+// const autoprefixer = require('autoprefixer')
 const pxtorem = require('postcss-pxtorem')
 const path = require('path')
 
@@ -36,22 +36,22 @@ module.exports = {
       .set('@assets', resolve('assets'))
       .set('@styles', resolve('styles'))
   },
-  css: {
-    loaderOptions: {
-      postcss: {
-        plugins: [
-          autoprefixer({
-            browsers: ['Android >= 4.0', 'iOS >= 7']
-          }),
-          pxtorem({
-            rootValue: 50,
-            unitPrecision: 3,
-            propList: ['*', '!font*'],
-            selectorBlackList: ['.ignore ', '.hairlines', 'van-circle__layer', '.van-hairline'],
-            minPixelValue: 2
-          })
-        ]
-      }
-    }
-  }
+  // css: {
+  //   loaderOptions: {
+  //     postcss: {
+  //       plugins: [
+  //         autoprefixer({
+  //           browsers: ['Android >= 4.0', 'iOS >= 7']
+  //         }),
+  //         pxtorem({
+  //           rootValue: 50,
+  //           unitPrecision: 3,
+  //           propList: ['*', '!font*'],
+  //           selectorBlackList: ['.ignore ', '.hairlines', 'van-circle__layer', '.van-hairline'],
+  //           minPixelValue: 2
+  //         })
+  //       ]
+  //     }
+  //   }
+  // }
 }

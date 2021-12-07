@@ -33,7 +33,7 @@ export default {
     }
   },
   created() {
-    this.isChoose = this.$route.query.isChoose ? this.$route.query.isChoose : false
+    this.isChoose = this.$route.query.isChoose ? !!this.$route.query.isChoose : false
     flag = false
     this.$request.get('/user/shipping-address/list', { token: storage.get('token') }).then(res => {
       const list = res.data || []
