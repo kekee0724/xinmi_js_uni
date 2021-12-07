@@ -44,6 +44,14 @@
 		"uni-ui",
 		"示例工程"
 	],
+	"browserslist": [
+		"defaults",
+		"not ie < 8",
+		"last 2 versions",
+		"> 1%",
+		"iOS 7",
+		"last 3 iOS versions"
+	],
 	"author": "",
 	"license": "MIT",
 	"bugs": {
