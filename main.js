@@ -1,4 +1,4 @@
-import 'vant/lib/index.css'
+// import 'vant/lib/index.css'
 import './static/common/flexible'
 import './static/styles/index.css'
 

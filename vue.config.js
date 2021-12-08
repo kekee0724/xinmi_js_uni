@@ -18,14 +18,18 @@ module.exports = {
         target: 'http://wx.lohike.net',
         changeOrigin: true, // target是域名的话，需要这个参数，
         secure: false, // 设置支持https协议的代理
-        pathRewrite: { '^/api': '' }
+        pathRewrite: {
+          '^/api': ''
+        }
       },
       '/shop_api': {
         target: 'https://api.it120.cc/xiaochengxu',
         // target: 'https://api.it120.cc/kekee0724',
         changeOrigin: true, // target是域名的话，需要这个参数，
         secure: false, // 设置支持https协议的代理
-        pathRewrite: { '^/shop_api': '' }
+        pathRewrite: {
+          '^/shop_api': ''
+        }
       }
     }
   },
@@ -37,23 +41,26 @@ module.exports = {
       .set('@assets', resolve('assets'))
       .set('@styles', resolve('styles'))
   },
-  css: {
-    loaderOptions: {
-      postcss: {
-        plugins: [
-          autoprefixer(),
-          pxtorem({
-            rootValue: 50,
-            unitPrecision: 3,
-            propList: ['*', '!font*'],
-            // 注意：如果有使用第三方UI如VUX，则需要配置下忽略选择器不转换。
-            // 规则是class中包含的字符串，如vux中所有的class前缀都是weui-。也可以是正则。
-            selectorBlackList: ['uni-', 'weui-', 'cp-icon-', '.ignore ', '.hairlines', 'van-circle__layer', '.van-hairline'],
-            exclude: /pages/,
-            minPixelValue: 2
-          })
-        ]
-      }
-    }
-  }
+  // css: {
+  //   loaderOptions: {
+  //     postcss: {
+  //       plugins: [
+  //         autoprefixer(),
+  //         // pxtorem({
+  //         //   rootValue: 50,
+  //         //   unitPrecision: 3,
+  //         //   propList: ['*', '!font*'],
+  //         //   // propList: [],
+  //         //   // 注意：如果有使用第三方UI如VUX，则需要配置下忽略选择器不转换。
+  //         //   // 规则是class中包含的字符串，如vux中所有的class前缀都是weui-。也可以是正则。
+  //         //   selectorBlackList: ['uni-', 'weui-', 'cp-icon-', '.ignore ', '.hairlines',
+  //         //     'van-circle__layer', '.van-hairline'
+  //         //   ],
+  //         //   exclude: /uni_modules/i,
+  //         //   minPixelValue: 2
+  //         // })
+  //       ]
+  //     }
+  //   }
+  // }
 }
