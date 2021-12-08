@@ -1349,20 +1349,20 @@
 		"list": [
 			{
 				"pagePath": "pages/home/home",
-				"iconPath": "static/component.png",
-				"selectedIconPath": "static/componentHL.png",
+                "iconPath": "static/images/icon/home.png",
+                "selectedIconPath": "static/images/icon/home-active.png",
 				"text": "首页"
 			},
 			{
 				"pagePath": "mall/cart/cart",
-				"iconPath": "static/component.png",
-				"selectedIconPath": "static/componentHL.png",
+                "iconPath": "static/images/icon/sever.png",
+                "selectedIconPath": "static/images/icon/sever-active.png",
 				"text": "购物车"	
 			},
 			{
 				"pagePath": "mall/user/user",
-				"iconPath": "static/component.png",
-				"selectedIconPath": "static/componentHL.png",
+                "iconPath": "static/images/icon/my.png",
+                "selectedIconPath": "static/images/icon/my-active.png",
 				"text": "我的"	
 			},
 			{
