@@ -170,7 +170,7 @@ body {
 img {
   display: block;
   max-width: 100%;
-  background: #eee;
+  // background: #eee;
   border: 0 none;
 }
 p {
