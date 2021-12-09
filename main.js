@@ -18,7 +18,7 @@ import {
 import request from './static/common/request-api'
 import store from './store'
 import App from './App.vue'
-// import router from './router'
+import router from './router'
 
 // #ifndef VUE3
 import Vue from 'vue'
@@ -39,8 +39,16 @@ Vue.prototype.$backgroundAudioData = {
   formatedPlayTime: '00:00:00'
 }
 App.mpType = 'app'
+
+router.beforeEach((to, from, next) => {
+  // 统计代码
+  //   window._hmt.push(['_trackPageview', to.fullPath])
+  next()
+})
+
 const app = new Vue({
   store,
+  router,
   ...App
 })
 app.$mount()
