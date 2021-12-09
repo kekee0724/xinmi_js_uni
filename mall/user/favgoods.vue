@@ -36,46 +36,46 @@
 </template>
 
 <script>
-	import {
-		Loading
-	} from 'vant'
-	import {
-		storage
-	} from '@/static/common/util'
+import {
+  Loading
+} from 'vant'
+import {
+  storage
+} from '@/static/common/util'
 
-	export default {
-		components: {
-			[Loading.name]: Loading,
-		},
-		data() {
-			return {
-				list: [],
-				loadingSpinner: true,
-			}
-		},
-		created() {
-			this.getFavList()
-		},
-		methods: {
-			getFavList(nameLike, page = 1, pageSize = 50) {
-				this.loadingSpinner = true
-				this.$request
-					.get('/shop/goods/fav/list', {
-						token: storage.get('token'),
-						nameLike,
-						page,
-						pageSize,
-					})
-					.then((res) => {
-						this.loadingSpinner = false
-						if (res.code !== 0) {
-							return
-						}
-						this.list = res.data
-					})
-			},
-		},
-	}
+export default {
+  components: {
+    [Loading.name]: Loading,
+  },
+  data() {
+    return {
+      list: [],
+      loadingSpinner: true,
+    }
+  },
+  created() {
+    this.getFavList()
+  },
+  methods: {
+    getFavList(nameLike, page = 1, pageSize = 50) {
+      this.loadingSpinner = true
+      this.$request
+        .get('/shop/goods/fav/list', {
+          token: storage.get('token'),
+          nameLike,
+          page,
+          pageSize,
+        })
+        .then((res) => {
+          this.loadingSpinner = false
+          if (res.code !== 0) {
+            return
+          }
+          this.list = res.data
+        })
+    },
+  },
+}
 </script>
 
 <style lang="less" scoped>
